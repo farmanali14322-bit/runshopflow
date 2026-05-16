@@ -746,53 +746,70 @@
 
   /* ============ TRUST STRIP ============ */
   .trust-strip {
-    padding: 56px 0 48px;
-    background: var(--bg);
-    border-top: 1px solid var(--line);
+    padding: var(--space-7) 0 var(--space-7);
+    background: var(--color-bg-base);
+    border-top: 1px solid var(--color-border-subtle);
   }
 
   .trust-strip-label {
     text-align: center;
-    font-size: 12px;
+    font-size: var(--type-micro);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    margin-bottom: 28px;
+    letter-spacing: 0.18em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-6);
   }
 
   .trust-logos {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 40px 56px;
-    opacity: 0.65;
+    gap: var(--space-8);
+    flex-wrap: wrap;
   }
 
-  @media (max-width: 720px) {
-    .trust-strip { padding: 40px 0 32px; }
-    .trust-logos { gap: 24px 36px; }
+  /* Mobile: single-row horizontal scroll-snap, hide scrollbar */
+  @media (max-width: 760px) {
+    .trust-strip { padding: var(--space-6) 0; }
+    .trust-logos {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 var(--space-5) var(--space-2);
+      margin: 0 calc(-1 * var(--space-5));
+      gap: var(--space-7);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .trust-logos::-webkit-scrollbar { display: none; }
+    .trust-mark { scroll-snap-align: center; flex-shrink: 0; }
   }
 
   .trust-mark {
-    color: var(--text-2);
-    font-size: 20px;
+    /* TODO: swap styled text for licensed SVG wordmarks at ~28px height */
+    color: var(--color-text-secondary);
+    font-size: 28px;
+    line-height: 1;
     font-weight: 600;
     letter-spacing: -0.01em;
     filter: grayscale(1);
-    transition: opacity 0.2s, color 0.2s;
+    opacity: 0.5;
+    transition: opacity var(--duration-base) var(--ease-out),
+                color var(--duration-base) var(--ease-out);
     user-select: none;
+    white-space: nowrap;
   }
 
-  .trust-mark:hover { color: var(--text); }
+  .trust-mark:hover { opacity: 0.85; color: var(--color-text-primary); }
 
-  .trust-mark.ghl { font-weight: 800; letter-spacing: -0.02em; }
-  .trust-mark.twilio { font-weight: 700; color: var(--text-2); }
-  .trust-mark.stripe { font-weight: 700; font-style: italic; letter-spacing: -0.03em; }
-  .trust-mark.google { font-weight: 500; letter-spacing: -0.01em; }
-  .trust-mark.mindbody { font-weight: 300; letter-spacing: 0.02em; }
-  .trust-mark.square { font-weight: 600; letter-spacing: 0.01em; }
+  .trust-mark.ghl { font-weight: 800; letter-spacing: -0.025em; }
+  .trust-mark.twilio { font-weight: 700; }
+  .trust-mark.stripe { font-weight: 700; font-style: italic; letter-spacing: -0.035em; }
+  .trust-mark.google { font-weight: 500; letter-spacing: -0.012em; }
+  .trust-mark.mindbody { font-weight: 300; letter-spacing: 0.04em; font-size: 24px; }
+  .trust-mark.square { font-weight: 600; letter-spacing: 0.005em; }
   .trust-mark.jobber { font-weight: 700; letter-spacing: -0.01em; }
 
   /* ============ PROOF SECTION ============ */
@@ -2255,7 +2272,7 @@
 <!-- ===== TRUST STRIP ===== -->
 <section class="trust-strip" aria-label="Integrations">
   <div class="wrap">
-    <div class="trust-strip-label">Integrates with everything you already use.</div>
+    <div class="trust-strip-label">Works with the tools you already use.</div>
     <div class="trust-logos">
       <span class="trust-mark ghl">GoHighLevel</span>
       <span class="trust-mark twilio">twilio</span>
