@@ -2199,28 +2199,103 @@
 
   /* ============ FOOTER ============ */
   footer {
-    padding: 40px 0;
-    border-top: 1px solid var(--line);
-    background: var(--bg-2);
+    padding: var(--space-7) 0 var(--space-5);
+    border-top: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
   }
 
   .foot {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: var(--space-7);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  @media (max-width: 760px) {
+    .foot { grid-template-columns: 1fr; gap: var(--space-5); }
+  }
+
+  .foot-brand .logo-mark {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .foot-brand-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  .foot-tag {
+    color: var(--color-text-tertiary);
+    font-size: var(--type-caption);
+    max-width: 280px;
+    line-height: 1.55;
+    margin-bottom: var(--space-3);
+  }
+
+  .foot-copy {
+    color: var(--color-text-muted);
+    font-size: var(--type-caption);
+  }
+
+  .foot-col-label {
+    font-size: var(--type-micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .foot-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .foot-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--type-caption);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .foot-list a:hover { color: var(--color-text-primary); }
+
+  .foot-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 16px;
-    font-size: 14px;
-    color: var(--muted);
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    font-size: var(--type-micro);
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
   }
 
-  .foot a {
-    color: var(--text-2);
+  .foot-bottom-links {
+    display: inline-flex;
+    gap: var(--space-5);
+  }
+
+  .foot-bottom-links a {
+    color: var(--color-text-tertiary);
     text-decoration: none;
-    transition: color 0.15s;
+    transition: color var(--duration-fast) var(--ease-out);
   }
 
-  .foot a:hover { color: var(--accent); }
+  .foot-bottom-links a:hover { color: var(--color-text-primary); }
 
   /* ============ ANIMATIONS ============ */
   @keyframes fadeUp {
@@ -2779,7 +2854,7 @@
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="faq">
+<section class="faq" id="faq">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">FAQ</span>
@@ -2837,8 +2912,40 @@
 <footer>
   <div class="wrap">
     <div class="foot">
-      <div>© 2026 ShopFlow · Built for detailing shop operators</div>
-      <div><a href="mailto:farman@runshopflow.com">farman@runshopflow.com</a></div>
+      <div class="foot-brand">
+        <div class="foot-brand-row">
+          <span class="logo-mark"></span>
+          ShopFlow
+        </div>
+        <p class="foot-tag">The automated follow-up system for US auto detailing shops.</p>
+        <p class="foot-copy">© 2026 ShopFlow</p>
+      </div>
+
+      <div>
+        <div class="foot-col-label">Navigate</div>
+        <ul class="foot-list">
+          <li><a href="#system">How it works</a></li>
+          <li><a href="#case-study">Case study</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="foot-col-label">Talk to us</div>
+        <ul class="foot-list">
+          <li><a href="mailto:farman@runshopflow.com" rel="nofollow">farman <span aria-hidden="true">[at]</span> runshopflow.com</a></li>
+          <li><a href="https://cal.com/farman-ali-hluli0/15min" target="_blank" rel="noopener">Book a 15-min call</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <div>Built for detailing shop operators.</div>
+      <div class="foot-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
     </div>
   </div>
 </footer>
