@@ -508,10 +508,58 @@
     font-weight: 500;
   }
 
-  .msg.them.delay-1 { animation-delay: 0.6s; }
-  .msg.you.delay-2 { animation-delay: 1.0s; }
-  .msg.them.delay-3 { animation-delay: 1.4s; }
-  .msg.you.delay-4 { animation-delay: 1.8s; }
+  .msg-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .msg-typing {
+    max-width: 60px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    animation: fadeUp 0.3s backwards;
+  }
+
+  .msg-typing.them {
+    background: var(--surface);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+  }
+
+  .msg-typing.you {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 4px 16px var(--accent-glow);
+  }
+
+  .msg-typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+    animation: typingDot 1.2s infinite ease-in-out;
+  }
+
+  .msg-typing.you span { background: rgba(255,255,255,0.85); }
+  .msg-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .msg-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingDot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-3px); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .msg-typing span { animation: none; opacity: 0.7; }
+    .msg, .msg-typing { animation: none; }
+  }
 
   /* Floating badge */
   .floating-badge {
@@ -1656,12 +1704,7 @@
 
             <div class="msg-meta">📞 Missed call · 9:38 AM</div>
 
-            <div class="msg you delay-2">Hey Mike — sorry we missed you at the shop. What service were you calling about?</div>
-            <div class="msg-meta" style="font-size: 8px;">9:38 AM · Auto-sent</div>
-
-            <div class="msg them delay-3">looking for ceramic coating quote for my model 3</div>
-
-            <div class="msg you delay-4">Got it. Sending pricing now + can book you in this week. What day works best?</div>
+            <div class="msg-thread" id="hero-thread" aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -2063,6 +2106,99 @@
     });
 
     recalc();
+  })();
+
+  // ===== Animated hero SMS thread =====
+  (function () {
+    var thread = document.getElementById('hero-thread');
+    var stage = document.querySelector('.phone-stage');
+    if (!thread || !stage) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var script = [
+      { side: 'you', text: 'Hey Mike — sorry we missed you at the shop. What service were you calling about?', metaAfter: '9:38 AM · Auto-sent' },
+      { side: 'them', text: 'looking for ceramic coating quote for my model 3' },
+      { side: 'you', text: 'Got it. Sending pricing now + can book you in this week. What day works best?' }
+    ];
+
+    var TYPING_MS = 600;
+    var BETWEEN_MS = 700;
+    var LOOP_PAUSE_MS = 10000;
+
+    var visible = true;
+    var stopped = false;
+    var timers = [];
+
+    function schedule(fn, ms) {
+      var id = setTimeout(fn, ms);
+      timers.push(id);
+      return id;
+    }
+    function clearAll() { timers.forEach(clearTimeout); timers = []; }
+
+    function el(tag, cls, html) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (html != null) n.innerHTML = html;
+      return n;
+    }
+
+    function renderAllStatic() {
+      thread.innerHTML = '';
+      script.forEach(function (m) {
+        thread.appendChild(el('div', 'msg ' + m.side, m.text));
+        if (m.metaAfter) {
+          var meta = el('div', 'msg-meta', m.metaAfter);
+          meta.style.fontSize = '8px';
+          thread.appendChild(meta);
+        }
+      });
+    }
+
+    function step(i) {
+      if (stopped) return;
+      if (i >= script.length) {
+        schedule(function () { thread.innerHTML = ''; step(0); }, LOOP_PAUSE_MS);
+        return;
+      }
+      var m = script[i];
+      var typing = el('div', 'msg-typing ' + m.side, '<span></span><span></span><span></span>');
+      thread.appendChild(typing);
+
+      schedule(function () {
+        if (stopped) return;
+        typing.remove();
+        var bubble = el('div', 'msg ' + m.side, m.text);
+        thread.appendChild(bubble);
+        if (m.metaAfter) {
+          var meta = el('div', 'msg-meta', m.metaAfter);
+          meta.style.fontSize = '8px';
+          thread.appendChild(meta);
+        }
+        schedule(function () { step(i + 1); }, BETWEEN_MS);
+      }, TYPING_MS);
+    }
+
+    function start() { stopped = false; thread.innerHTML = ''; step(0); }
+    function stop() { stopped = true; clearAll(); }
+
+    if (reduce) {
+      renderAllStatic();
+      return;
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !visible) { visible = true; start(); }
+          else if (!e.isIntersecting && visible) { visible = false; stop(); }
+        });
+      }, { threshold: 0.2 });
+      io.observe(stage);
+    }
+
+    start();
   })();
 </script>
 
