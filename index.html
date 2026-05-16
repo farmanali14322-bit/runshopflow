@@ -1548,13 +1548,13 @@
   }
 
   .offer-card {
-    max-width: 720px;
+    max-width: 520px;
     margin: 0 auto;
-    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
-    border: 1px solid var(--line-2);
-    border-radius: 24px;
+    background: linear-gradient(180deg, var(--color-bg-elevated), var(--color-bg-surface));
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-lg);
     position: relative;
   }
 
@@ -1562,133 +1562,169 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 50%);
+    background: radial-gradient(circle at 50% 0%, var(--color-accent-glow), transparent 55%);
     pointer-events: none;
   }
 
   .offer-card-top {
-    padding: 36px 40px 32px;
-    border-bottom: 1px solid var(--line);
+    padding: var(--space-6) var(--space-6) var(--space-5);
+    border-bottom: 1px solid var(--color-border-subtle);
     position: relative;
   }
 
   .offer-tag {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 11px;
+    gap: 6px;
+    font-size: var(--type-micro);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: var(--text);
-    padding: 6px 14px;
-    border-radius: 100px;
-    margin-bottom: 22px;
-    box-shadow: 0 4px 16px var(--accent-glow);
+    letter-spacing: 0.14em;
+    background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-soft));
+    color: var(--color-text-primary);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-5);
+    box-shadow: var(--shadow-accent);
   }
 
-  .offer-tag::before {
-    content: '★';
-    font-size: 10px;
-  }
+  .offer-tag::before { content: '★'; font-size: 10px; }
 
   .offer-name {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    letter-spacing: -0.015em;
+    color: var(--color-text-primary);
   }
 
   .offer-tagline {
-    color: var(--muted);
-    font-size: 16px;
-    margin-bottom: 28px;
+    color: var(--color-text-tertiary);
+    font-size: var(--type-caption);
+    margin-bottom: var(--space-5);
+  }
+
+  .offer-price-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .offer-price-old {
+    font-size: var(--type-caption);
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
   }
 
   .offer-price-row {
     display: flex;
     align-items: baseline;
-    gap: 14px;
-    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .offer-price {
-    font-size: 56px;
+    font-size: clamp(40px, 5vw, 56px);
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     line-height: 1;
-    background: linear-gradient(135deg, var(--text), var(--text-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-text-primary);
   }
 
   .offer-price-unit {
-    font-size: 18px;
-    color: var(--muted);
+    font-size: var(--type-body);
+    color: var(--color-text-tertiary);
     font-weight: 500;
   }
 
-  .offer-price-old {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .offer-price-old s {
-    text-decoration-thickness: 1px;
-  }
-
   .offer-setup {
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: 10px;
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--color-border-subtle);
+    font-size: var(--type-caption);
+    color: var(--color-text-secondary);
+  }
+
+  .offer-setup-old {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    font-size: 12px;
+    margin-left: 4px;
   }
 
   .offer-includes {
-    padding: 32px 40px;
+    padding: var(--space-6);
     position: relative;
   }
 
   .offer-includes-label {
-    font-size: 11px;
+    font-size: var(--type-micro);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--muted);
-    margin-bottom: 20px;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-4);
   }
 
   .offer-list {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  @media (max-width: 520px) {
+    .offer-list { grid-template-columns: 1fr; }
   }
 
   .offer-list li {
     display: flex;
-    gap: 14px;
+    gap: 10px;
     align-items: flex-start;
-    font-size: 15px;
-    color: var(--text-2);
+    font-size: var(--type-caption);
+    color: var(--color-text-secondary);
     line-height: 1.5;
   }
 
   .offer-list li::before {
     content: '';
-    width: 22px;
-    height: 22px;
-    background: var(--money-bg);
-    border: 1px solid rgba(74, 222, 128, 0.3);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-6' stroke='%234ADE80' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    margin-top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23FF5B1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8l3 3 7-7'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  .offer-cta-row {
+    padding: 0 var(--space-6) var(--space-6);
+  }
+
+  .offer-cta {
+    width: 100%;
+  }
+
+  .offer-spots {
+    text-align: center;
+    margin-top: var(--space-5);
+    font-size: var(--type-caption);
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .offer-spots-wrap { text-align: center; }
+
+  .offer-spots-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-primary);
+    box-shadow: 0 0 8px var(--color-accent-glow);
+    animation: pulse 2s ease-in-out infinite;
   }
 
   /* ============ FINAL CTA ============ */
@@ -2604,32 +2640,49 @@
       <p>After that, the rate goes up. If you're in early, you're locked in for as long as you stay.</p>
     </div>
 
-    <div class="offer-card">
+    <div class="offer-card" id="pricing">
       <div class="offer-card-top">
-        <span class="offer-tag">Founding Member</span>
+        <span class="offer-tag">Founding Member — First 5 shops</span>
         <div class="offer-name">Full system, built and managed</div>
         <p class="offer-tagline">Live in 21 days. Custom-tuned to your shop.</p>
 
-        <div class="offer-price-row">
-          <span class="offer-price">$997</span>
-          <span class="offer-price-unit">/month</span>
-          <span class="offer-price-old"><s>$1,997/mo</s> after first 5 shops</span>
+        <div class="offer-price-stack">
+          <span class="offer-price-old">$1,997/mo after first 5 shops</span>
+          <div class="offer-price-row">
+            <span class="offer-price">$997</span>
+            <span class="offer-price-unit">/month</span>
+          </div>
         </div>
-        <p class="offer-setup">+ $1,500 one-time setup (normally $3,000)</p>
+        <p class="offer-setup">+ $1,500 one-time setup<span class="offer-setup-old">$3,000</span></p>
       </div>
 
       <div class="offer-includes">
         <div class="offer-includes-label">What's included</div>
         <ul class="offer-list">
-          <li>Full GoHighLevel build, custom-tuned to your shop's services and pricing</li>
-          <li>All 4 automations installed and tested in 21 days</li>
-          <li>Twilio + email infrastructure, fully SMS-compliant</li>
-          <li>White-label client portal with your branding (your customers never see ours)</li>
-          <li>Monthly tune-ups + new sequences as your business grows</li>
-          <li>Direct line by text — no support tickets, no account managers</li>
-          <li>Migration from current tools (Mindbody, Square, Jobber) handled by us</li>
+          <li>Full GoHighLevel build, tuned to your services</li>
+          <li>All 4 automations live in 21 days</li>
+          <li>Twilio + email, SMS-compliant</li>
+          <li>White-label client portal with your branding</li>
+          <li>Monthly tune-ups + new sequences</li>
+          <li>Direct line by text — no tickets</li>
+          <li>Migration from Mindbody / Square / Jobber</li>
+          <li>1 dedicated operator, not an account manager</li>
         </ul>
       </div>
+
+      <div class="offer-cta-row">
+        <a href="https://cal.com/farman-ali-hluli0/15min" class="btn offer-cta" target="_blank" rel="noopener">
+          Claim your founding spot
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="offer-spots-wrap">
+      <span class="offer-spots">
+        <span class="offer-spots-dot"></span>
+        3 of 5 spots remaining
+      </span>
     </div>
   </div>
 </section>
