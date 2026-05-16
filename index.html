@@ -654,6 +654,57 @@
     line-height: 1.5;
   }
 
+  /* ============ TRUST STRIP ============ */
+  .trust-strip {
+    padding: 56px 0 48px;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+
+  .trust-strip-label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .trust-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px 56px;
+    opacity: 0.65;
+  }
+
+  @media (max-width: 720px) {
+    .trust-strip { padding: 40px 0 32px; }
+    .trust-logos { gap: 24px 36px; }
+  }
+
+  .trust-mark {
+    color: var(--text-2);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    filter: grayscale(1);
+    transition: opacity 0.2s, color 0.2s;
+    user-select: none;
+  }
+
+  .trust-mark:hover { color: var(--text); }
+
+  .trust-mark.ghl { font-weight: 800; letter-spacing: -0.02em; }
+  .trust-mark.twilio { font-weight: 700; color: var(--text-2); }
+  .trust-mark.stripe { font-weight: 700; font-style: italic; letter-spacing: -0.03em; }
+  .trust-mark.google { font-weight: 500; letter-spacing: -0.01em; }
+  .trust-mark.mindbody { font-weight: 300; letter-spacing: 0.02em; }
+  .trust-mark.square { font-weight: 600; letter-spacing: 0.01em; }
+  .trust-mark.jobber { font-weight: 700; letter-spacing: -0.01em; }
+
   /* ============ PROOF SECTION ============ */
   .proof {
     padding: 100px 0;
@@ -1708,6 +1759,22 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST STRIP ===== -->
+<section class="trust-strip" aria-label="Integrations">
+  <div class="wrap">
+    <div class="trust-strip-label">Integrates with everything you already use.</div>
+    <div class="trust-logos">
+      <span class="trust-mark ghl">GoHighLevel</span>
+      <span class="trust-mark twilio">twilio</span>
+      <span class="trust-mark stripe">stripe</span>
+      <span class="trust-mark google">Google</span>
+      <span class="trust-mark mindbody">MINDBODY</span>
+      <span class="trust-mark square">Square</span>
+      <span class="trust-mark jobber">Jobber</span>
     </div>
   </div>
 </section>
