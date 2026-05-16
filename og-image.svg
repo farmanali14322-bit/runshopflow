@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A0B"/>
+      <stop offset="100%" stop-color="#18181C"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5B1F"/>
+      <stop offset="100%" stop-color="#FF7A47"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF5B1F" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FF5B1F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <ellipse cx="950" cy="120" rx="500" ry="320" fill="url(#glow)"/>
+  <g transform="translate(80,180)">
+    <rect width="56" height="56" rx="12" fill="url(#orange)"/>
+    <rect x="18" y="18" width="20" height="20" rx="3" fill="#0A0A0B" transform="rotate(45 28 28)"/>
+    <text x="80" y="38" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="#FAFAF8" letter-spacing="-0.5">ShopFlow</text>
+  </g>
+  <text x="80" y="340" font-family="Inter, system-ui, sans-serif" font-size="68" font-weight="800" fill="#FAFAF8" letter-spacing="-2">Book 2.5x more detailing jobs</text>
+  <text x="80" y="416" font-family="Inter, system-ui, sans-serif" font-size="68" font-weight="800" fill="#FAFAF8" letter-spacing="-2">from leads you</text>
+  <text x="600" y="416" font-family="Instrument Serif, Georgia, serif" font-size="76" font-style="italic" fill="#FF5B1F" letter-spacing="-1">already get.</text>
+  <text x="80" y="500" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="500" fill="#C5C5C0">Automated follow-up for US auto detailing shops.</text>
+  <text x="80" y="560" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#82827E" letter-spacing="2">RUNSHOPFLOW.COM</text>
+</svg>

@@ -25,7 +25,11 @@
 <meta property="og:description" content="Automated follow-up system for US auto detailing shops. Text back missed calls in 60s. Chase quotes for 14 days. Ask for reviews automatically.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://runshopflow.com">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://runshopflow.com/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://runshopflow.com/og-image.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,6 +72,25 @@
   }
 
   ::selection { background: var(--accent); color: var(--bg); }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .stat-gradient {
+    background: linear-gradient(135deg, var(--accent) 0%, #FF3B66 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
 
   .wrap {
     max-width: 1200px;
@@ -1743,6 +1766,22 @@
     font-size: 13px;
   }
 
+  /* ============ MOBILE SPACING TIGHTEN ============ */
+  @media (max-width: 480px) {
+    .hero { padding: 88px 0 64px; }
+    .proof, .problem, .solution, .why, .offer, .faq { padding: 72px 0; }
+    .calc { padding: 64px 0; }
+    .final { padding: 88px 0 96px; }
+    .trust-strip { padding: 32px 0 28px; }
+
+    .section-head { margin-bottom: 36px; }
+    .problem-bottom { margin-top: 36px; padding: 22px 24px; font-size: 17px; }
+    .final-includes { margin-top: 36px; padding: 22px 22px; }
+    .calc-card { padding: 28px 20px; }
+    .qual-card { padding: 22px 18px; }
+    .qual-form { grid-template-columns: 1fr; }
+  }
+
   /* ============ SCROLL FADE-INS ============ */
   html.js-fade :is(
     .section-head,
@@ -2041,7 +2080,7 @@
 
         <div class="hero-trust">
           <span class="check">✓</span>
-          <span>Real client. Real numbers. Our pilot shop in Fairfax, VA recovered <strong style="color: var(--money);">$18,720/mo</strong> in 30 days.</span>
+          <span>Real client. Real numbers. Our pilot shop in Fairfax, VA recovered <strong class="stat-gradient">$18,720/mo</strong> in 30 days.</span>
         </div>
       </div>
 
