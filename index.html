@@ -1743,6 +1743,37 @@
     font-size: 13px;
   }
 
+  /* ============ STICKY MOBILE CTA ============ */
+  .mobile-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(10, 10, 11, 0.92);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.45);
+    transform: translateY(110%);
+    transition: transform 0.3s ease-out;
+    display: none;
+  }
+
+  .mobile-cta.visible { transform: translateY(0); }
+
+  .mobile-cta .btn {
+    width: 100%;
+    padding: 16px 22px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-cta { display: block; }
+    body.has-mobile-cta { padding-bottom: 80px; }
+  }
+
   /* ============ FAQ ============ */
   .faq {
     padding: 120px 0;
@@ -2368,6 +2399,14 @@
   </div>
 </footer>
 
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="mobile-cta" id="mobile-cta" aria-hidden="true">
+  <a href="https://cal.com/farman-ali-hluli0/15min" class="btn" target="_blank" rel="noopener">
+    Book a 15-min call
+    <span class="btn-arrow">→</span>
+  </a>
+</div>
+
 <script>
   // ===== Missed-revenue calculator =====
   (function () {
@@ -2541,6 +2580,43 @@
         thanks.hidden = false;
       });
     });
+  })();
+
+  // ===== Sticky mobile CTA =====
+  (function () {
+    var bar = document.getElementById('mobile-cta');
+    var finalEl = document.getElementById('book');
+    if (!bar || !finalEl) return;
+
+    var mq = window.matchMedia('(max-width: 767px)');
+    var finalInView = false;
+    var io = null;
+
+    function apply() {
+      if (!mq.matches) {
+        bar.classList.remove('visible');
+        bar.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('has-mobile-cta');
+        return;
+      }
+      document.body.classList.add('has-mobile-cta');
+      var show = !finalInView;
+      bar.classList.toggle('visible', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { finalInView = e.isIntersecting; });
+        apply();
+      }, { threshold: 0.15 });
+      io.observe(finalEl);
+    }
+
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else if (mq.addListener) mq.addListener(apply);
+
+    apply();
   })();
 </script>
 
