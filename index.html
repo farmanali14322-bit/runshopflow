@@ -1062,8 +1062,33 @@
     line-height: 1.6;
   }
 
+  .why-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    padding: 10px var(--space-4);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-full);
+    font-size: var(--type-caption);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-surface);
+    letter-spacing: -0.005em;
+  }
+
+  .why-stamp strong {
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+
+  .why-stamp-mark {
+    color: var(--color-accent-primary);
+    font-size: 10px;
+    line-height: 1;
+  }
+
   .why-detail {
-    margin-top: 18px;
+    margin-top: var(--space-5);
   }
 
   .why-detail > summary {
@@ -2549,7 +2574,12 @@
       <span class="eyebrow">Why us</span>
       <h2>We built this for $50M companies. <span class="serif">Now we build it for detailing shops.</span></h2>
 
-      <p>For 7 years we've built marketing automation for global B2B companies where one missed lead is a $50,000 mistake. ShopFlow is that same playbook, sized for your shop — no enterprise bloat, no account managers who don't know what PPF is.</p>
+      <p>For 7 years we've built marketing automation for global B2B companies where one missed lead is a $50,000 mistake. ShopFlow is that same playbook, sized for your shop — no enterprise bloat.</p>
+
+      <div class="why-stamp" aria-label="Background">
+        <span class="why-stamp-mark">▲</span>
+        Built by operators who shipped this for <strong>NETSOL Technologies (NASDAQ: NTWK)</strong>, $50M+ B2B fintech.
+      </div>
 
       <details class="why-detail">
         <summary>Read the full background</summary>
