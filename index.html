@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  RUNSHOPFLOW — Conversion Landing Page v3
+  ============================================================
+  Cal.com link: https://cal.com/farman-ali-hluli0/15min
+  Brand: ShopFlow · Domain: runshopflow.com · Email: farman@runshopflow.com
+  Deploy: drag to netlify.com/drop
+  ============================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopFlow — Book 2.5x more detailing jobs from leads you already get</title>
+<meta name="description" content="The automated follow-up system for US auto detailing shops. Texts back missed calls in 60 seconds. Chases quote requests for 14 days. Asks every customer for a Google review.">
+
+<!-- Favicon (inline SVG, no external file needed) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF5B1F'/%3E%3Cstop offset='100%25' stop-color='%23FF7A47'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3Crect x='10' y='10' width='12' height='12' rx='2' fill='%230A0A0B' transform='rotate(45 16 16)'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF5B1F'/%3E%3Cstop offset='100%25' stop-color='%23FF7A47'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Crect x='56' y='56' width='68' height='68' rx='10' fill='%230A0A0B' transform='rotate(45 90 90)'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#FF5B1F">
+
+<!-- Open Graph / social previews -->
+<meta property="og:title" content="ShopFlow — Book 2.5x more detailing jobs">
+<meta property="og:description" content="Automated follow-up system for US auto detailing shops. Text back missed calls in 60s. Chase quotes for 14 days. Ask for reviews automatically.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://runshopflow.com">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0A0A0B;
+    --bg-2: #111114;
+    --bg-3: #18181C;
+    --surface: #1C1C20;
+    --line: #26262C;
+    --line-2: #2E2E36;
+    --text: #FAFAF8;
+    --text-2: #C5C5C0;
+    --muted: #82827E;
+    --muted-2: #5C5C58;
+    --accent: #FF5B1F;
+    --accent-2: #FF7A47;
+    --accent-glow: rgba(255, 91, 31, 0.25);
+    --money: #4ADE80;
+    --money-bg: rgba(74, 222, 128, 0.1);
+    --warn: #FF9966;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 17px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+  }
+
+  /* ============ TYPOGRAPHY ============ */
+  h1, h2, h3 {
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  h1 { font-size: clamp(48px, 7vw, 88px); }
+  h2 { font-size: clamp(36px, 5.5vw, 64px); }
+  h3 { font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; }
+
+  .serif {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 11, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.025em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px var(--accent-glow);
+  }
+
+  .logo-mark::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--bg);
+    border-radius: 2px;
+    transform: rotate(45deg);
+  }
+
+  .nav-cta {
+    background: var(--text);
+    color: var(--bg);
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent);
+    color: var(--text);
+  }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--accent);
+    color: var(--text);
+    padding: 18px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    box-shadow: 0 4px 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.6s;
+  }
+
+  .btn:hover::before { left: 100%; }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+
+  .btn-large {
+    padding: 22px 36px;
+    font-size: 17px;
+  }
+
+  .btn-arrow { font-size: 18px; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--line-2);
+    box-shadow: none;
+  }
+
+  .btn-ghost:hover {
+    background: var(--surface);
+    border-color: var(--text-2);
+    box-shadow: none;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 140px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, var(--accent-glow), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: -1px -1px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 1000px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 100px 0 80px; }
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    margin-bottom: 28px;
+    background: var(--surface);
+    padding: 8px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+  }
+
+  .hero-pill .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--money);
+    box-shadow: 0 0 12px var(--money);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+  }
+
+  .hero h1 {
+    margin-bottom: 28px;
+    animation: fadeUp 0.7s 0.1s backwards;
+  }
+
+  .hero h1 .accent {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero h1 .serif {
+    color: var(--text-2);
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    color: var(--text-2);
+    margin-bottom: 40px;
+    max-width: 560px;
+    line-height: 1.5;
+    animation: fadeUp 0.7s 0.2s backwards;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    animation: fadeUp 0.7s 0.3s backwards;
+  }
+
+  .cta-meta {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .hero-trust {
+    margin-top: 44px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--text-2);
+    animation: fadeUp 0.7s 0.4s backwards;
+  }
+
+  .hero-trust .check {
+    width: 22px;
+    height: 22px;
+    background: var(--money-bg);
+    color: var(--money);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ============ HERO PHONE MOCKUP ============ */
+  .phone-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s 0.4s backwards;
+  }
+
+  .phone {
+    width: 320px;
+    background: linear-gradient(180deg, #1A1A1F, #131316);
+    border: 1px solid var(--line-2);
+    border-radius: 36px;
+    padding: 14px;
+    box-shadow:
+      0 32px 80px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 24px;
+    background: var(--bg);
+    border-radius: 100px;
+    z-index: 5;
+  }
+
+  .phone-screen {
+    background: #08080A;
+    border-radius: 24px;
+    padding: 50px 16px 16px;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .phone-time {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .phone-contact {
+    text-align: center;
+    padding: 12px 0 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
+  }
+
+  .phone-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    margin: 0 auto 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+  }
+
+  .phone-contact .name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .phone-contact .biz {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .msg {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 13px;
+    line-height: 1.4;
+    animation: fadeUp 0.5s backwards;
+  }
+
+  .msg.them {
+    background: var(--surface);
+    color: var(--text-2);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+  }
+
+  .msg.you {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: var(--text);
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 4px 16px var(--accent-glow);
+  }
+
+  .msg-meta {
+    font-size: 9px;
+    color: var(--muted-2);
+    text-align: center;
+    padding: 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .msg.them.delay-1 { animation-delay: 0.6s; }
+  .msg.you.delay-2 { animation-delay: 1.0s; }
+  .msg.them.delay-3 { animation-delay: 1.4s; }
+  .msg.you.delay-4 { animation-delay: 1.8s; }
+
+  /* Floating badge */
+  .floating-badge {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .badge-tl {
+    top: 30px;
+    left: -60px;
+    animation-delay: 0s;
+  }
+
+  .badge-br {
+    bottom: 60px;
+    right: -50px;
+    animation-delay: 3s;
+  }
+
+  @media (max-width: 1100px) {
+    .badge-tl { left: -20px; top: 0; }
+    .badge-br { right: -20px; }
+  }
+
+  @media (max-width: 540px) {
+    .floating-badge { display: none; }
+    .phone { width: 280px; }
+  }
+
+  .badge-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--money-bg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .badge-icon.orange {
+    background: rgba(255, 91, 31, 0.15);
+  }
+
+  .badge-content .label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .badge-content .value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-top: 4px;
+  }
+
+  .badge-content .value.green { color: var(--money); }
+
+  /* ============ SECTION COMMON ============ */
+  section { position: relative; }
+
+  .section-head {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-head h2 { margin: 14px 0 16px; }
+
+  .section-head p {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  /* ============ PROOF SECTION ============ */
+  .proof {
+    padding: 100px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .proof-card {
+    background:
+      linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 1px solid var(--line-2);
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 1040px;
+    margin: 0 auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  }
+
+  .proof-card-head {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--bg-3);
+  }
+
+  .proof-card-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .proof-card-name .badge {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .proof-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--money);
+    background: var(--money-bg);
+    padding: 6px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    font-weight: 500;
+  }
+
+  .proof-card-meta .live {
+    width: 6px;
+    height: 6px;
+    background: var(--money);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .proof-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 720px) {
+    .proof-stats { grid-template-columns: 1fr; }
+  }
+
+  .proof-stat {
+    padding: 36px 32px;
+    border-right: 1px solid var(--line);
+  }
+
+  .proof-stat:last-child { border-right: none; }
+
+  @media (max-width: 720px) {
+    .proof-stat {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .proof-stat:last-child { border-bottom: none; }
+  }
+
+  .proof-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .proof-stat-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .proof-before {
+    font-size: 22px;
+    color: var(--muted-2);
+    text-decoration: line-through;
+    font-weight: 500;
+  }
+
+  .proof-arrow {
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .proof-after {
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--money);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .proof-recovered {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proof-recovered::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 50%, rgba(255,255,255,0.15), transparent 50%);
+  }
+
+  .proof-recovered-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.9;
+    position: relative;
+  }
+
+  .proof-recovered-num {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    position: relative;
+  }
+
+  .proof-quote {
+    margin-top: 36px;
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 32px;
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 14px 14px 0;
+  }
+
+  .proof-quote-text {
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 14px;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  .proof-quote-attr {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ============ PROBLEM SECTION ============ */
+  .problem {
+    padding: 120px 0;
+    background: var(--bg);
+  }
+
+  .pains {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 720px) {
+    .pains { grid-template-columns: 1fr; }
+  }
+
+  .pain {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pain::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .pain:hover {
+    border-color: var(--line-2);
+    transform: translateY(-3px);
+  }
+
+  .pain:hover::before { opacity: 1; }
+
+  .pain-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warn);
+    margin-bottom: 18px;
+  }
+
+  .pain-tag .num {
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 91, 31, 0.15);
+    border: 1px solid rgba(255, 91, 31, 0.3);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  .pain h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    line-height: 1.25;
+    color: var(--text);
+  }
+
+  .pain p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .problem-bottom {
+    margin-top: 56px;
+    padding: 28px 36px;
+    background: linear-gradient(135deg, rgba(255, 91, 31, 0.1), rgba(255, 91, 31, 0.05));
+    border: 1px solid rgba(255, 91, 31, 0.2);
+    border-radius: 16px;
+    text-align: center;
+    font-size: 19px;
+    color: var(--text);
+    font-weight: 500;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .problem-bottom strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ============ SOLUTION ============ */
+  .solution {
+    padding: 120px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    position: relative;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 28px;
+    align-items: center;
+    padding: 28px 32px;
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .step:hover {
+    border-color: var(--line-2);
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 720px) {
+    .step {
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+    .step-trigger-tag { display: none; }
+  }
+
+  .step-num {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    box-shadow: 0 8px 24px var(--accent-glow);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 720px) {
+    .step-num {
+      width: 56px;
+      height: 56px;
+      font-size: 20px;
+    }
+  }
+
+  .step-trigger {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .step h3 {
+    color: var(--text);
+    font-size: 19px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .step-trigger-tag {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ============ WHY US ============ */
+  .why {
+    padding: 120px 0;
+    background: var(--bg);
+    position: relative;
+  }
+
+  .why-content {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .why-content h2 {
+    margin-bottom: 40px;
+  }
+
+  .why-content h2 .accent {
+    color: var(--accent);
+  }
+
+  .why-content p {
+    font-size: 19px;
+    line-height: 1.65;
+    margin-bottom: 22px;
+    color: var(--text-2);
+  }
+
+  .why-content p:last-child { margin-bottom: 0; }
+
+  .why-content strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ============ OFFER ============ */
+  .offer {
+    padding: 120px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .offer-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 1px solid var(--line-2);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 50%);
+    pointer-events: none;
+  }
+
+  .offer-card-top {
+    padding: 36px 40px 32px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .offer-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 16px var(--accent-glow);
+  }
+
+  .offer-tag::before {
+    content: '★';
+    font-size: 10px;
+  }
+
+  .offer-name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .offer-tagline {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .offer-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .offer-price {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--text), var(--text-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .offer-price-unit {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .offer-price-old {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .offer-price-old s {
+    text-decoration-thickness: 1px;
+  }
+
+  .offer-setup {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .offer-includes {
+    padding: 32px 40px;
+    position: relative;
+  }
+
+  .offer-includes-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .offer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .offer-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .offer-list li::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    background: var(--money-bg);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-6' stroke='%234ADE80' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* ============ FINAL CTA ============ */
+  .final {
+    padding: 140px 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow), transparent 60%),
+      var(--bg);
+    text-align: center;
+    border-top: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .final-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .final h2 {
+    margin-bottom: 22px;
+  }
+
+  .final h2 .accent { color: var(--accent); }
+
+  .final-sub {
+    color: var(--text-2);
+    font-size: 19px;
+    max-width: 620px;
+    margin: 0 auto 40px;
+    line-height: 1.55;
+  }
+
+  .final-meta {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .final-includes {
+    margin: 56px auto 0;
+    max-width: 580px;
+    padding: 28px 32px;
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-align: left;
+  }
+
+  .final-includes-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .final-includes ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .final-includes li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    color: var(--text-2);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .final-includes li::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ============ FAQ ============ */
+  .faq {
+    padding: 120px 0;
+    background: var(--bg);
+  }
+
+  .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq-item summary {
+    padding: 26px 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .faq-item summary:hover { color: var(--accent); }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+
+  .faq-answer {
+    padding: 0 8px 26px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 640px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .foot a {
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .foot a:hover { color: var(--accent); }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="#" class="logo">
+        <span class="logo-mark"></span>
+        ShopFlow
+      </a>
+      <a href="#book" class="nav-cta">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-pill">
+          <span class="dot"></span>
+          For US auto detailing shops
+        </div>
+
+        <h1>Book <span class="accent">2.5x more</span> detailing jobs from leads <span class="serif">you already get.</span></h1>
+
+        <p class="hero-sub">
+          We install the automated follow-up system that texts back missed calls in 60 seconds, chases every quote for 14 days, and asks every customer for a Google review — without you lifting a finger.
+        </p>
+
+        <div class="hero-cta-row">
+          <a href="https://cal.com/farman-ali-hluli0/15min" class="btn btn-large" target="_blank" rel="noopener">
+            Book a 15-min call
+            <span class="btn-arrow">→</span>
+          </a>
+          <span class="cta-meta">Free. No pitch.<br>Walk away with a teardown.</span>
+        </div>
+
+        <div class="hero-trust">
+          <span class="check">✓</span>
+          <span>Real client. Real numbers. Our pilot shop in Fairfax, VA recovered <strong style="color: var(--money);">$18,720/mo</strong> in 30 days.</span>
+        </div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="floating-badge badge-tl">
+          <div class="badge-icon">📞</div>
+          <div class="badge-content">
+            <div class="label">Missed call</div>
+            <div class="value">Auto-text in 60s</div>
+          </div>
+        </div>
+
+        <div class="floating-badge badge-br">
+          <div class="badge-icon orange">💰</div>
+          <div class="badge-content">
+            <div class="label">Recovered</div>
+            <div class="value green">+$18,720/mo</div>
+          </div>
+        </div>
+
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-time">9:41</div>
+            <div class="phone-contact">
+              <div class="phone-avatar">M</div>
+              <div class="name">Mike (Customer)</div>
+              <div class="biz">+1 (703) 555-0182</div>
+            </div>
+
+            <div class="msg-meta">📞 Missed call · 9:38 AM</div>
+
+            <div class="msg you delay-2">Hey Mike — sorry we missed you at the shop. What service were you calling about?</div>
+            <div class="msg-meta" style="font-size: 8px;">9:38 AM · Auto-sent</div>
+
+            <div class="msg them delay-3">looking for ceramic coating quote for my model 3</div>
+
+            <div class="msg you delay-4">Got it. Sending pricing now + can book you in this week. What day works best?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROOF ===== -->
+<section class="proof">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Live case study</span>
+      <h2>Same shop. Same staff. <span class="serif">3x the booked jobs.</span></h2>
+      <p>Same lead volume coming in. The system did the rest.</p>
+    </div>
+
+    <div class="proof-card">
+      <div class="proof-card-head">
+        <div class="proof-card-name">
+          <div class="badge">★</div>
+          <span>5-bay detailing shop · Fairfax, VA</span>
+        </div>
+        <div class="proof-card-meta">
+          <span class="live"></span>
+          Live 11+ months
+        </div>
+      </div>
+
+      <div class="proof-stats">
+        <div class="proof-stat">
+          <div class="proof-stat-label">Quote close rate</div>
+          <div class="proof-stat-row">
+            <span class="proof-before">22%</span>
+            <span class="proof-arrow">→</span>
+            <span class="proof-after">58%</span>
+          </div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-label">Monthly revenue</div>
+          <div class="proof-stat-row">
+            <span class="proof-before">$11.4k</span>
+            <span class="proof-arrow">→</span>
+            <span class="proof-after">$30.1k</span>
+          </div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-label">Owner time on follow-up</div>
+          <div class="proof-stat-row">
+            <span class="proof-before">~30 min/day</span>
+            <span class="proof-arrow">→</span>
+            <span class="proof-after">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-recovered">
+        <span class="proof-recovered-label">Recovered revenue / month</span>
+        <span class="proof-recovered-num">+$18,720</span>
+      </div>
+    </div>
+
+    <div class="proof-quote">
+      <p class="proof-quote-text">"Best money I've spent on the business in three years. The system caught $19k in jobs my staff would've missed last month alone."</p>
+      <p class="proof-quote-attr">— Owner, 5-bay detailing shop in Fairfax, VA</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section class="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2>You're losing money in <span class="serif">four exact spots.</span></h2>
+      <p>Every shop we look at has the same four leaks. None of them are about pricing.</p>
+    </div>
+
+    <div class="pains">
+      <div class="pain">
+        <div class="pain-tag">
+          <span class="num">1</span>
+          Missed calls
+        </div>
+        <h3>The phone rings. You're elbow-deep in a paint correction.</h3>
+        <p>By the time you call back four hours later, they've already booked with the next shop on Google. Lost revenue: every single time.</p>
+      </div>
+
+      <div class="pain">
+        <div class="pain-tag">
+          <span class="num">2</span>
+          Dead leads
+        </div>
+        <h3>Quote forms come in. Three days pass. Lead is dead.</h3>
+        <p>You meant to follow up Monday. Then a Tesla rolled in needing PPF. Now it's Thursday and the customer found someone else.</p>
+      </div>
+
+      <div class="pain">
+        <div class="pain-tag">
+          <span class="num">3</span>
+          No reviews
+        </div>
+        <h3>Customer leaves happy. Nobody asks for the review.</h3>
+        <p>Your competitor with 247 reviews is winning every Google search. You've done 2,000 jobs and have 31 reviews. The math is the math.</p>
+      </div>
+
+      <div class="pain">
+        <div class="pain-tag">
+          <span class="num">4</span>
+          No rebooking
+        </div>
+        <h3>$3,000 ceramic install. Customer never comes back.</h3>
+        <p>Every coating client should be back at month 11 for the annual decon. You know it. They forget. That's $400–800/year per client, gone.</p>
+      </div>
+    </div>
+
+    <div class="problem-bottom">
+      You don't have a marketing problem. <strong>You have a follow-up problem.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="solution">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The system</span>
+      <h2>Four automations. <span class="serif">One system.</span></h2>
+      <p>Built specifically for detailing shops. Plain English. Zero tech jargon.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-trigger">Trigger: Missed call</div>
+          <h3>Auto-text in 60 seconds: "Sorry we missed you — what service were you calling about?"</h3>
+          <p>Most callers will text but won't leave a voicemail. You catch them before they call the next shop.</p>
+        </div>
+        <div class="step-trigger-tag">SMS · Live</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-trigger">Trigger: Quote request</div>
+          <h3>14-day SMS + email follow-up. Until they book or opt out.</h3>
+          <p>Day 1, 3, 5, 8, 11, 14. Friendly, on-brand, written for detailing customers. Stops the second they reply.</p>
+        </div>
+        <div class="step-trigger-tag">Multi-channel</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-trigger">Trigger: Job complete</div>
+          <h3>Automatic Google review request the next morning.</h3>
+          <p>5-star sentiment goes straight to Google. Sub-5-star routes to a private feedback flow you actually see and can act on.</p>
+        </div>
+        <div class="step-trigger-tag">Smart routing</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-trigger">Trigger: Coating install</div>
+          <h3>Annual rebook reminder at month 11.</h3>
+          <p>Tagged the day they pay. Auto-touchpoints at 9, 11, and 12 months. ~22% rebook rate from work you already did.</p>
+        </div>
+        <div class="step-trigger-tag">Recurring revenue</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section class="why">
+  <div class="wrap">
+    <div class="why-content">
+      <span class="eyebrow">Why us</span>
+      <h2>We built this for $50M companies. <span class="serif">Now we build it for detailing shops.</span></h2>
+
+      <p>For 7 years we've built marketing automation systems for global B2B companies — asset finance software, automotive enterprise platforms. The kind of work where one missed lead is a $50,000 mistake.</p>
+
+      <p>The detailing world has the same problem at smaller scale. <strong>Leads come in faster than the owner can chase them.</strong> The phone rings while you're on a 5-stage correction. Quote forms fill while you're matching ceramic to a client's PPF.</p>
+
+      <p>We started ShopFlow because the same playbook the enterprise guys use works perfectly at your scale. <strong>Without the enterprise overhead, the bloated retainers, or the account managers who don't know what PPF is.</strong></p>
+
+      <p>One real case study. One shop. <span style="color: var(--accent);">Looking for the next four.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFFER ===== -->
+<section class="offer">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The offer</span>
+      <h2>Founding-member pricing. <span class="serif">First 5 shops only.</span></h2>
+      <p>After that, the rate goes up. If you're in early, you're locked in for as long as you stay.</p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-card-top">
+        <span class="offer-tag">Founding Member</span>
+        <div class="offer-name">Full system, built and managed</div>
+        <p class="offer-tagline">Live in 21 days. Custom-tuned to your shop.</p>
+
+        <div class="offer-price-row">
+          <span class="offer-price">$997</span>
+          <span class="offer-price-unit">/month</span>
+          <span class="offer-price-old"><s>$1,997/mo</s> after first 5 shops</span>
+        </div>
+        <p class="offer-setup">+ $1,500 one-time setup (normally $3,000)</p>
+      </div>
+
+      <div class="offer-includes">
+        <div class="offer-includes-label">What's included</div>
+        <ul class="offer-list">
+          <li>Full GoHighLevel build, custom-tuned to your shop's services and pricing</li>
+          <li>All 4 automations installed and tested in 21 days</li>
+          <li>Twilio + email infrastructure, fully SMS-compliant</li>
+          <li>White-label client portal with your branding (your customers never see ours)</li>
+          <li>Monthly tune-ups + new sequences as your business grows</li>
+          <li>Direct line by text — no support tickets, no account managers</li>
+          <li>Migration from current tools (Mindbody, Square, Jobber) handled by us</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final" id="book">
+  <div class="wrap">
+    <div class="final-content">
+      <span class="eyebrow" style="display: inline-flex; justify-content: center;">Last step</span>
+      <h2 style="margin-top: 14px;">Ready to find <span class="accent">$18k/mo</span> in your business?</h2>
+      <p class="final-sub">
+        Book a free 15-min call. We'll look at your site, your booking flow, your current follow-up. You'll walk away with a clear list of where the money is leaking — even if we never work together.
+      </p>
+
+      <a href="https://cal.com/farman-ali-hluli0/15min" class="btn btn-large" target="_blank" rel="noopener">
+        Book your 15-min call
+        <span class="btn-arrow">→</span>
+      </a>
+
+      <p class="final-meta">Slots open weekdays · Usually book within 48 hours</p>
+
+      <div class="final-includes">
+        <div class="final-includes-label">What you'll get on the call</div>
+        <ul>
+          <li>A live walkthrough of where your shop is losing leads</li>
+          <li>The exact dollar amount you're leaving on the table per month</li>
+          <li>Whether the system fits your shop (we'll tell you if it doesn't)</li>
+          <li>A clear quote — no follow-up emails, no high-pressure pitch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common <span class="serif">questions.</span></h2>
+      <p>If yours isn't here, just ask on the call.</p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What if I don't have time to manage another tool?</summary>
+        <div class="faq-answer">
+          That's the whole point. The system runs itself once it's built. You keep doing what you do — detailing cars. We handle the rest. If something breaks or needs tuning, you text us. That's it.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>I already use Mindbody / Square / Jobber. Can you work with that?</summary>
+        <div class="faq-answer">
+          Yes. We integrate with whatever you're already running, or we move you to something better if your current setup is what's holding you back. Migration is included.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if it doesn't work for my shop?</summary>
+        <div class="faq-answer">
+          The math is the math. If you have consistent inbound leads — and most detailing shops do — and they're slipping through the follow-up cracks, the system catches them. Our pilot shop has been running it for 11+ months. On the call, we'll walk you through the exact mechanics so you can judge for yourself whether it fits your shop before signing anything.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why are you cheaper than other agencies?</summary>
+        <div class="faq-answer">
+          Founding-member pricing for the first 5 shops only. After that, the rate goes to $1,997/mo + $3,000 setup. If you're in early, you keep your rate as long as you're with us. Simple as that.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How long until I see results?</summary>
+        <div class="faq-answer">
+          The system goes live in 21 days. Most shops see their first booked job from automation within 7 days of launch — usually a missed-call text-back that converts to a same-week booking.
+        </div>
+      </details>
+    </div>
+
+    <div style="text-align: center; margin-top: 56px;">
+      <a href="https://cal.com/farman-ali-hluli0/15min" class="btn btn-large" target="_blank" rel="noopener">
+        Book a 15-min call
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>© 2026 ShopFlow · Built for detailing shop operators</div>
+      <div><a href="mailto:farman@runshopflow.com">farman@runshopflow.com</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
