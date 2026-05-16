@@ -1743,6 +1743,45 @@
     font-size: 13px;
   }
 
+  /* ============ SCROLL FADE-INS ============ */
+  html.js-fade :is(
+    .section-head,
+    .trust-strip-label,
+    .trust-logos,
+    .proof-card,
+    .pains,
+    .problem-bottom,
+    .calc-card,
+    .steps,
+    .why-content,
+    .offer-card,
+    .final-grid,
+    .faq-list
+  ) {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+  }
+
+  html.js-fade :is(
+    .section-head,
+    .trust-strip-label,
+    .trust-logos,
+    .proof-card,
+    .pains,
+    .problem-bottom,
+    .calc-card,
+    .steps,
+    .why-content,
+    .offer-card,
+    .final-grid,
+    .faq-list
+  ).in {
+    opacity: 1;
+    transform: none;
+  }
+
   /* ============ EXIT-INTENT MODAL ============ */
   .exit-modal {
     position: fixed;
@@ -1950,6 +1989,16 @@
 
 </style>
 <script src="https://t.contentsquare.net/uxa/2713013792543.js"></script>
+<script>
+  // Set fade-ready class before paint so initial state applies without flash.
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-fade');
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
@@ -2782,6 +2831,30 @@
         thanks.hidden = false;
       });
     });
+  })();
+
+  // ===== Scroll-triggered fade-ins =====
+  (function () {
+    if (!document.documentElement.classList.contains('js-fade')) return;
+    var selector = '.section-head, .trust-strip-label, .trust-logos, .proof-card, .pains, .problem-bottom, .calc-card, .steps, .why-content, .offer-card, .final-grid, .faq-list';
+    var els = Array.prototype.slice.call(document.querySelectorAll(selector));
+    if (!els.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    els.forEach(function (el) { io.observe(el); });
   })();
 </script>
 
