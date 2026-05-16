@@ -36,23 +36,110 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
+  /* =========================================================
+     DESIGN TOKENS — single source of truth.
+     Legacy short names (--bg, --accent, etc.) preserved as
+     aliases below for the older inline references; new code
+     should prefer the semantic names.
+     ========================================================= */
   :root {
-    --bg: #0A0A0B;
-    --bg-2: #111114;
-    --bg-3: #18181C;
-    --surface: #1C1C20;
-    --line: #26262C;
-    --line-2: #2E2E36;
-    --text: #FAFAF8;
-    --text-2: #C5C5C0;
-    --muted: #82827E;
-    --muted-2: #5C5C58;
-    --accent: #FF5B1F;
-    --accent-2: #FF7A47;
-    --accent-glow: rgba(255, 91, 31, 0.25);
-    --money: #4ADE80;
-    --money-bg: rgba(74, 222, 128, 0.1);
-    --warn: #FF9966;
+    /* COLOR — semantic */
+    --color-bg-base: #0A0A0B;
+    --color-bg-surface: #111114;
+    --color-bg-elevated: #18181C;
+    --color-bg-overlay: #1C1C20;
+
+    --color-text-primary: #FAFAF8;
+    --color-text-secondary: #C5C5C0;
+    --color-text-tertiary: #82827E;
+    --color-text-muted: #5C5C58;
+
+    --color-accent-primary: #FF5B1F;
+    --color-accent-secondary: #FF3B66;
+    --color-accent-soft: #FF7A47;
+    --color-accent-glow: rgba(255, 91, 31, 0.25);
+
+    --color-border-subtle: #26262C;
+    --color-border-strong: #2E2E36;
+
+    --color-success: #4ADE80;
+    --color-success-bg: rgba(74, 222, 128, 0.1);
+    --color-warning: #FF9966;
+    --color-danger: #FF5C5C;
+
+    /* TYPE — fluid clamps, mobile→desktop */
+    --type-display:  clamp(48px, 5.8vw, 80px);
+    --type-h1:       clamp(36px, 4.4vw, 56px);
+    --type-h2:       clamp(28px, 3.2vw, 40px);
+    --type-h3:       clamp(20px, 1.6vw, 24px);
+    --type-body-lg:  clamp(18px, 1.4vw, 20px);
+    --type-body:     clamp(16px, 1.1vw, 17px);
+    --type-caption:  clamp(13px, 0.95vw, 14px);
+    --type-micro:    clamp(11px, 0.8vw, 12px);
+
+    /* SPACING — 4-based scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+    --space-10: 128px;
+
+    /* SECTION RHYTHM */
+    --section-y: var(--space-9);          /* 96 desktop */
+    --section-y-mobile: var(--space-8);   /* 64 mobile */
+
+    /* RADII */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* SHADOWS — dark-mode aware, low-opacity glow */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+    --shadow-accent: 0 4px 24px var(--color-accent-glow);
+
+    /* MOTION */
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 400ms;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* LEGACY ALIASES — keep until everything is migrated. */
+    --bg: var(--color-bg-base);
+    --bg-2: var(--color-bg-surface);
+    --bg-3: var(--color-bg-elevated);
+    --surface: var(--color-bg-overlay);
+    --line: var(--color-border-subtle);
+    --line-2: var(--color-border-strong);
+    --text: var(--color-text-primary);
+    --text-2: var(--color-text-secondary);
+    --muted: var(--color-text-tertiary);
+    --muted-2: var(--color-text-muted);
+    --accent: var(--color-accent-primary);
+    --accent-2: var(--color-accent-soft);
+    --accent-glow: var(--color-accent-glow);
+    --money: var(--color-success);
+    --money-bg: var(--color-success-bg);
+    --warn: var(--color-warning);
+  }
+
+  /* Global reduced-motion respect */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,10 +148,10 @@
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--color-bg-base);
+    color: var(--color-text-primary);
     line-height: 1.55;
-    font-size: 17px;
+    font-size: var(--type-body);
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -110,9 +197,10 @@
     font-weight: 700;
   }
 
-  h1 { font-size: clamp(48px, 7vw, 88px); }
-  h2 { font-size: clamp(36px, 5.5vw, 64px); }
-  h3 { font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; }
+  h1 { font-size: var(--type-h1); line-height: 1.05; }
+  h2 { font-size: var(--type-h2); line-height: 1.1; }
+  h3 { font-size: var(--type-h3); line-height: 1.25; letter-spacing: -0.02em; }
+  .display { font-size: var(--type-display); line-height: 1.02; letter-spacing: -0.035em; }
 
   .serif {
     font-family: 'Instrument Serif', serif;
@@ -212,19 +300,21 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    background: var(--accent);
-    color: var(--text);
+    gap: var(--space-3);
+    background: var(--color-accent-primary);
+    color: var(--color-text-primary);
     padding: 18px 30px;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 16px;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                background-color var(--duration-fast) var(--ease-out);
     font-family: inherit;
-    box-shadow: 0 4px 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: var(--shadow-accent), inset 0 1px 0 rgba(255,255,255,0.15);
     position: relative;
     overflow: hidden;
   }
@@ -317,7 +407,10 @@
   }
 
   @media (max-width: 640px) {
-    .hero { padding: 100px 0 80px; }
+    .hero { padding: 100px 0 var(--space-8); }
+    .proof, .problem, .calc, .solution, .why, .offer, .faq {
+      padding: var(--section-y-mobile) 0;
+    }
   }
 
   .hero-pill {
@@ -349,7 +442,10 @@
   }
 
   .hero h1 {
-    margin-bottom: 28px;
+    font-size: var(--type-display);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin-bottom: var(--space-5);
     animation: fadeUp 0.7s 0.1s backwards;
   }
 
@@ -364,9 +460,9 @@
   }
 
   .hero-sub {
-    font-size: 19px;
-    color: var(--text-2);
-    margin-bottom: 40px;
+    font-size: var(--type-body-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-7);
     max-width: 560px;
     line-height: 1.5;
     animation: fadeUp 0.7s 0.2s backwards;
@@ -730,7 +826,7 @@
 
   /* ============ PROOF SECTION ============ */
   .proof {
-    padding: 100px 0;
+    padding: var(--section-y) 0;
     background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -927,7 +1023,7 @@
 
   /* ============ PROBLEM SECTION ============ */
   .problem {
-    padding: 120px 0;
+    padding: var(--section-y) 0;
     background: var(--bg);
   }
 
@@ -1100,7 +1196,7 @@
 
   /* ============ CALCULATOR ============ */
   .calc {
-    padding: 120px 0;
+    padding: var(--section-y) 0;
     background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     position: relative;
   }
@@ -1300,7 +1396,7 @@
 
   /* ============ SOLUTION ============ */
   .solution {
-    padding: 120px 0;
+    padding: var(--section-y) 0;
     background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
     position: relative;
   }
@@ -1400,7 +1496,7 @@
 
   /* ============ WHY US ============ */
   .why {
-    padding: 120px 0;
+    padding: var(--section-y) 0;
     background: var(--bg);
     position: relative;
   }
@@ -1434,7 +1530,7 @@
 
   /* ============ OFFER ============ */
   .offer {
-    padding: 120px 0;
+    padding: var(--section-y) 0;
     background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -2003,7 +2099,7 @@
 
   /* ============ FAQ ============ */
   .faq {
-    padding: 120px 0;
+    padding: var(--section-y) 0;
     background: var(--bg);
   }
 
