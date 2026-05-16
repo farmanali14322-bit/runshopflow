@@ -1029,6 +1029,75 @@
     font-weight: 700;
   }
 
+  .pain-detail {
+    margin-top: 16px;
+  }
+
+  .pain-detail > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s;
+  }
+
+  .pain-detail > summary::-webkit-details-marker { display: none; }
+  .pain-detail > summary::after {
+    content: '→';
+    transition: transform 0.2s ease-out;
+  }
+
+  .pain-detail[open] > summary::after { transform: rotate(90deg); }
+  .pain-detail > summary:hover { opacity: 0.8; }
+
+  .pain-detail-body {
+    margin-top: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .why-detail {
+    margin-top: 18px;
+  }
+
+  .why-detail > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .why-detail > summary::-webkit-details-marker { display: none; }
+  .why-detail > summary::after { content: '→'; transition: transform 0.2s ease-out; }
+  .why-detail[open] > summary::after { transform: rotate(90deg); }
+
+  .why-detail-body {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .why-detail-body p {
+    margin-top: 14px;
+    color: var(--text-2);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .why-detail-body p:first-child { margin-top: 0; }
+
   /* ============ CALCULATOR ============ */
   .calc {
     padding: 120px 0;
@@ -2067,7 +2136,7 @@
         <h1>Book <span class="accent">2.5x more</span> detailing jobs from leads <span class="serif">you already get.</span></h1>
 
         <p class="hero-sub">
-          We install the automated follow-up system that texts back missed calls in 60 seconds, chases every quote for 14 days, and asks every customer for a Google review — without you lifting a finger.
+          We install the automated follow-up system that texts back missed calls in 60 seconds, chases every quote for 14 days, and asks every customer for a Google review.
         </p>
 
         <div class="hero-cta-row">
@@ -2213,7 +2282,13 @@
           Missed calls
         </div>
         <h3>The phone rings. You're elbow-deep in a paint correction.</h3>
-        <p>By the time you call back four hours later, they've already booked with the next shop on Google. Lost revenue: every single time.</p>
+        <p>By the time you call back, they've already booked with the next shop on Google.</p>
+        <details class="pain-detail">
+          <summary>See how this happens</summary>
+          <div class="pain-detail-body">
+            Most callers won't leave a voicemail — they're already scrolling for the next number. If you don't text back inside the first five minutes, the win-rate falls off a cliff. By 4pm, the job's gone.
+          </div>
+        </details>
       </div>
 
       <div class="pain">
@@ -2222,7 +2297,13 @@
           Dead leads
         </div>
         <h3>Quote forms come in. Three days pass. Lead is dead.</h3>
-        <p>You meant to follow up Monday. Then a Tesla rolled in needing PPF. Now it's Thursday and the customer found someone else.</p>
+        <p>You meant to follow up Monday. Now it's Thursday and the customer found someone else.</p>
+        <details class="pain-detail">
+          <summary>See how this happens</summary>
+          <div class="pain-detail-body">
+            Three days is the median window before a quote goes cold. Most shops touch the lead once — maybe twice — and then it slides off the to-do list. Meanwhile the customer is comparing you to two other shops who replied in an hour.
+          </div>
+        </details>
       </div>
 
       <div class="pain">
@@ -2231,7 +2312,13 @@
           No reviews
         </div>
         <h3>Customer leaves happy. Nobody asks for the review.</h3>
-        <p>Your competitor with 247 reviews is winning every Google search. You've done 2,000 jobs and have 31 reviews. The math is the math.</p>
+        <p>Your competitor with 247 reviews wins every Google search. You've done 2,000 jobs and have 31 reviews.</p>
+        <details class="pain-detail">
+          <summary>See how this happens</summary>
+          <div class="pain-detail-body">
+            The customers who'd leave the best reviews almost never do — they're happy, they pay, they drive off. The reviews you do get skew toward the unhappy minority. Without a systematic ask in the 24 hours after a job, you stay invisible to the next searcher.
+          </div>
+        </details>
       </div>
 
       <div class="pain">
@@ -2240,7 +2327,13 @@
           No rebooking
         </div>
         <h3>$3,000 ceramic install. Customer never comes back.</h3>
-        <p>Every coating client should be back at month 11 for the annual decon. You know it. They forget. That's $400–800/year per client, gone.</p>
+        <p>Every coating client should be back at month 11 for the annual decon. You know it. They forget.</p>
+        <details class="pain-detail">
+          <summary>See how this happens</summary>
+          <div class="pain-detail-body">
+            That's $400–800/year per client, gone. And you're paying ads to acquire new customers instead of farming the ones you already converted.
+          </div>
+        </details>
       </div>
     </div>
 
@@ -2356,13 +2449,18 @@
       <span class="eyebrow">Why us</span>
       <h2>We built this for $50M companies. <span class="serif">Now we build it for detailing shops.</span></h2>
 
-      <p>For 7 years we've built marketing automation systems for global B2B companies — asset finance software, automotive enterprise platforms. The kind of work where one missed lead is a $50,000 mistake.</p>
+      <p>For 7 years we've built marketing automation for global B2B companies where one missed lead is a $50,000 mistake. ShopFlow is that same playbook, sized for your shop — no enterprise bloat, no account managers who don't know what PPF is.</p>
 
-      <p>The detailing world has the same problem at smaller scale. <strong>Leads come in faster than the owner can chase them.</strong> The phone rings while you're on a 5-stage correction. Quote forms fill while you're matching ceramic to a client's PPF.</p>
+      <details class="why-detail">
+        <summary>Read the full background</summary>
+        <div class="why-detail-body">
+          <p>We spent those years inside asset-finance software and automotive enterprise platforms — environments where leads aren't $400 detail jobs, they're six-figure contracts that take months to close. Every touchpoint had to be tracked, every lag in follow-up cost real money.</p>
 
-      <p>We started ShopFlow because the same playbook the enterprise guys use works perfectly at your scale. <strong>Without the enterprise overhead, the bloated retainers, or the account managers who don't know what PPF is.</strong></p>
+          <p>The detailing world has the same problem at smaller scale. <strong>Leads come in faster than the owner can chase them.</strong> The phone rings while you're on a 5-stage correction. Quote forms fill while you're matching ceramic to a client's PPF.</p>
 
-      <p>One real case study. One shop. <span style="color: var(--accent);">Looking for the next four.</span></p>
+          <p>ShopFlow exists because the same playbook the enterprise guys use works perfectly at your scale — without the bloated retainers or the discovery-call theater. One real case study. One shop. <span style="color: var(--accent);">Looking for the next four.</span></p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -2515,7 +2613,7 @@
       <details class="faq-item">
         <summary>What if I don't have time to manage another tool?</summary>
         <div class="faq-answer">
-          That's the whole point. The system runs itself once it's built. You keep doing what you do — detailing cars. We handle the rest. If something breaks or needs tuning, you text us. That's it.
+          That's the whole point — the system runs itself once it's built. You keep detailing cars. If something breaks or needs tuning, you text us.
         </div>
       </details>
 
@@ -2529,14 +2627,14 @@
       <details class="faq-item">
         <summary>What if it doesn't work for my shop?</summary>
         <div class="faq-answer">
-          The math is the math. If you have consistent inbound leads — and most detailing shops do — and they're slipping through the follow-up cracks, the system catches them. Our pilot shop has been running it for 11+ months. On the call, we'll walk you through the exact mechanics so you can judge for yourself whether it fits your shop before signing anything.
+          The math is the math. If your shop has consistent inbound leads slipping through the follow-up cracks, the system catches them. On the call we walk you through the mechanics so you can judge fit before signing anything.
         </div>
       </details>
 
       <details class="faq-item">
         <summary>Why are you cheaper than other agencies?</summary>
         <div class="faq-answer">
-          Founding-member pricing for the first 5 shops only. After that, the rate goes to $1,997/mo + $3,000 setup. If you're in early, you keep your rate as long as you're with us. Simple as that.
+          Founding-member pricing for the first 5 shops only. After that, the rate goes to $1,997/mo + $3,000 setup. If you're in early, you keep your rate as long as you're with us.
         </div>
       </details>
 
