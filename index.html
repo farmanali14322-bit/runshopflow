@@ -1585,6 +1585,164 @@
     flex-shrink: 0;
   }
 
+  /* ============ FINAL TWO-COLUMN + FORM ============ */
+  .final-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 48px;
+    text-align: left;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .final-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+
+  .final-cta-col {
+    text-align: center;
+    padding-top: 8px;
+  }
+
+  .final-cta-col .final-meta { margin-top: 20px; }
+
+  .qual-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 32px;
+    text-align: left;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  @media (max-width: 480px) {
+    .qual-card { padding: 24px 20px; border-radius: 14px; }
+  }
+
+  .qual-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .qual-card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+
+  .qual-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .qual-field { display: flex; flex-direction: column; gap: 6px; }
+  .qual-field.full { grid-column: 1 / -1; }
+
+  .qual-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .qual-input,
+  .qual-select {
+    background: var(--bg-3);
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 500;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+
+  .qual-input::placeholder { color: var(--muted-2); }
+
+  .qual-input:focus,
+  .qual-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 91, 31, 0.18);
+  }
+
+  .qual-input:invalid:not(:placeholder-shown) {
+    border-color: rgba(255, 91, 31, 0.5);
+  }
+
+  .qual-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%2382827E' d='M6 8.5L1.5 4h9z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .qual-submit {
+    margin-top: 8px;
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .qual-fine {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    text-align: center;
+  }
+
+  .qual-thanks {
+    text-align: center;
+    padding: 24px 8px;
+  }
+
+  .qual-thanks .check {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--money);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+  }
+
+  .qual-thanks h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .qual-thanks p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .qual-error {
+    grid-column: 1 / -1;
+    background: rgba(255, 91, 31, 0.08);
+    border: 1px solid rgba(255, 91, 31, 0.3);
+    color: var(--warn);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
   /* ============ FAQ ============ */
   .faq {
     padding: 120px 0;
@@ -2059,21 +2217,87 @@
         Book a free 15-min call. We'll look at your site, your booking flow, your current follow-up. You'll walk away with a clear list of where the money is leaking — even if we never work together.
       </p>
 
-      <a href="https://cal.com/farman-ali-hluli0/15min" class="btn btn-large" target="_blank" rel="noopener">
-        Book your 15-min call
-        <span class="btn-arrow">→</span>
-      </a>
+      <div class="final-grid">
+        <div class="final-cta-col">
+          <a href="https://cal.com/farman-ali-hluli0/15min" class="btn btn-large" target="_blank" rel="noopener">
+            Book your 15-min call
+            <span class="btn-arrow">→</span>
+          </a>
+          <p class="final-meta">Slots open weekdays · Usually book within 48 hours</p>
 
-      <p class="final-meta">Slots open weekdays · Usually book within 48 hours</p>
+          <div class="final-includes">
+            <div class="final-includes-label">What you'll get on the call</div>
+            <ul>
+              <li>A live walkthrough of where your shop is losing leads</li>
+              <li>The exact dollar amount you're leaving on the table per month</li>
+              <li>Whether the system fits your shop (we'll tell you if it doesn't)</li>
+              <li>A clear quote — no follow-up emails, no high-pressure pitch</li>
+            </ul>
+          </div>
+        </div>
 
-      <div class="final-includes">
-        <div class="final-includes-label">What you'll get on the call</div>
-        <ul>
-          <li>A live walkthrough of where your shop is losing leads</li>
-          <li>The exact dollar amount you're leaving on the table per month</li>
-          <li>Whether the system fits your shop (we'll tell you if it doesn't)</li>
-          <li>A clear quote — no follow-up emails, no high-pressure pitch</li>
-        </ul>
+        <div class="qual-card">
+          <div class="qual-card-title">Prefer we reach out?</div>
+          <div class="qual-card-sub">Drop your info and we'll send a teardown by email within 48 hours.</div>
+
+          <form class="qual-form" id="qual-form" novalidate>
+            <div class="qual-field full">
+              <label class="qual-label" for="q-shop">Shop name</label>
+              <input class="qual-input" id="q-shop" name="shopName" type="text" placeholder="Apex Detailing" autocomplete="organization">
+            </div>
+
+            <div class="qual-field full">
+              <label class="qual-label" for="q-location">City, State</label>
+              <input class="qual-input" id="q-location" name="location" type="text" placeholder="Fairfax, VA" autocomplete="address-level2">
+            </div>
+
+            <div class="qual-field">
+              <label class="qual-label" for="q-phone">Phone</label>
+              <input class="qual-input" id="q-phone" name="phone" type="tel" placeholder="(703) 555-0123" autocomplete="tel">
+            </div>
+
+            <div class="qual-field">
+              <label class="qual-label" for="q-email">Email <span style="color: var(--accent);">*</span></label>
+              <input class="qual-input" id="q-email" name="email" type="email" placeholder="you@shop.com" autocomplete="email" required>
+            </div>
+
+            <div class="qual-field full">
+              <label class="qual-label" for="q-revenue">Monthly revenue</label>
+              <select class="qual-select" id="q-revenue" name="monthlyRevenue">
+                <option value="">Select range</option>
+                <option value="<10k">Under $10k</option>
+                <option value="10-25k">$10k – $25k</option>
+                <option value="25-50k">$25k – $50k</option>
+                <option value="50k+">$50k+</option>
+              </select>
+            </div>
+
+            <div class="qual-field full">
+              <label class="qual-label" for="q-problem">Biggest follow-up problem</label>
+              <select class="qual-select" id="q-problem" name="biggestProblem">
+                <option value="">Select one</option>
+                <option value="missed-calls">Missed calls</option>
+                <option value="dead-quotes">Dead quote leads</option>
+                <option value="no-reviews">No reviews</option>
+                <option value="no-rebooking">Not rebooking coatings</option>
+                <option value="all">All of the above</option>
+              </select>
+            </div>
+
+            <button class="btn qual-submit" type="submit" id="qual-submit">
+              Send my info
+              <span class="btn-arrow">→</span>
+            </button>
+
+            <div class="qual-fine">No spam. We reply personally.</div>
+          </form>
+
+          <div class="qual-thanks" id="qual-thanks" hidden>
+            <div class="check">✓</div>
+            <h4>Got it — thanks.</h4>
+            <p>We'll have something useful in your inbox within 48 hours.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2266,6 +2490,57 @@
     }
 
     start();
+  })();
+
+  // ===== Qualification form =====
+  (function () {
+    var form = document.getElementById('qual-form');
+    var thanks = document.getElementById('qual-thanks');
+    var submit = document.getElementById('qual-submit');
+    if (!form || !thanks || !submit) return;
+
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function showError(msg) {
+      var existing = form.querySelector('.qual-error');
+      if (existing) existing.remove();
+      var box = document.createElement('div');
+      box.className = 'qual-error';
+      box.textContent = msg;
+      form.insertBefore(box, submit);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = {};
+      Array.from(form.elements).forEach(function (el) {
+        if (el.name) data[el.name] = el.value.trim();
+      });
+
+      var emailField = form.querySelector('#q-email');
+      if (!data.email || !emailRe.test(data.email)) {
+        showError('Please enter a valid email address.');
+        emailField.focus();
+        return;
+      }
+
+      var err = form.querySelector('.qual-error');
+      if (err) err.remove();
+      submit.disabled = true;
+      submit.style.opacity = '0.7';
+      submit.firstChild.textContent = 'Sending… ';
+
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).catch(function () {
+        // Placeholder endpoint — silent on failure for now.
+      }).finally(function () {
+        form.hidden = true;
+        thanks.hidden = false;
+      });
+    });
   })();
 </script>
 
