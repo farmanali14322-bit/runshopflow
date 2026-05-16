@@ -1274,15 +1274,33 @@
   }
 
   .calc-output-tag {
-    margin-top: 12px;
-    color: var(--text-2);
-    font-size: 17px;
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--type-body);
     font-weight: 500;
   }
 
+  .calc-output-annual {
+    margin-top: var(--space-3);
+    color: var(--color-text-tertiary);
+    font-size: var(--type-caption);
+    font-variant-numeric: tabular-nums;
+  }
+
   .calc-output-cta {
-    margin-top: 28px;
+    margin-top: var(--space-6);
     display: inline-flex;
+  }
+
+  .calc-bridge {
+    text-align: center;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-size: var(--type-body-lg);
+    color: var(--color-text-secondary);
+    margin: 0 auto var(--space-6);
+    max-width: 600px;
+    letter-spacing: -0.005em;
   }
 
   .calc-foot {
@@ -2343,23 +2361,24 @@
 <!-- ===== CALCULATOR ===== -->
 <section class="calc" id="calculator">
   <div class="wrap">
+    <div class="calc-bridge">You've seen the leaks. Here's what they're costing you.</div>
     <div class="section-head">
       <span class="eyebrow">Your numbers</span>
-      <h2>How much are you leaving <span class="serif">on the table?</span></h2>
-      <p>Adjust the three sliders to your shop. The math is honest.</p>
+      <h2>How much are you <span class="serif">actually losing?</span></h2>
+      <p>Quick math based on our pilot shop's results.</p>
     </div>
 
     <div class="calc-card">
       <div class="calc-inputs">
         <div class="calc-field">
           <label class="calc-label" for="calc-leads">Monthly inbound leads</label>
-          <input class="calc-input" id="calc-leads" type="number" min="0" step="1" value="80" inputmode="numeric">
+          <input class="calc-input" id="calc-leads" type="number" min="0" max="2000" step="1" value="60" inputmode="numeric">
         </div>
 
         <div class="calc-field">
           <label class="calc-label" for="calc-value">Average job value</label>
           <div class="calc-input-prefix">
-            <input class="calc-input" id="calc-value" type="number" min="0" step="10" value="450" inputmode="numeric">
+            <input class="calc-input" id="calc-value" type="number" min="0" max="20000" step="10" value="350" inputmode="numeric">
           </div>
         </div>
 
@@ -2375,12 +2394,13 @@
       <div class="calc-output">
         <div class="calc-output-label">Estimated missed revenue</div>
         <div class="calc-output-value" id="calc-out">$0</div>
-        <div class="calc-output-tag">/month you're leaving on the table</div>
+        <div class="calc-output-tag" id="calc-tag">/month you're leaving on the table</div>
+        <div class="calc-output-annual" id="calc-annual">$0 across a year</div>
         <a href="https://cal.com/farman-ali-hluli0/15min" class="btn calc-output-cta" target="_blank" rel="noopener">
           Recover this
           <span class="btn-arrow">→</span>
         </a>
-        <div class="calc-foot">Based on our pilot shop's 58% close rate.</div>
+        <div class="calc-foot">Based on our pilot shop's 58% close rate after install.</div>
       </div>
     </div>
   </div>
@@ -2698,18 +2718,60 @@
     var rateEl = document.getElementById('calc-rate');
     var rateOut = document.getElementById('calc-rate-out');
     var out = document.getElementById('calc-out');
-    if (!leadsEl || !valueEl || !rateEl || !out) return;
+    var tag = document.getElementById('calc-tag');
+    var annual = document.getElementById('calc-annual');
+    if (!leadsEl || !valueEl || !rateEl || !out || !tag || !annual) return;
 
     var fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var DEFAULT_TAG = '/month you’re leaving on the table';
+
+    var currentValue = 0;
+    var rafId = null;
+
+    function animateTo(target) {
+      if (reduce) { currentValue = target; out.textContent = fmt.format(Math.round(target)); return; }
+      if (rafId) cancelAnimationFrame(rafId);
+      var from = currentValue;
+      var start = null;
+      var duration = 280;
+      function frame(t) {
+        if (start === null) start = t;
+        var p = Math.min(1, (t - start) / duration);
+        var eased = 1 - Math.pow(1 - p, 3);
+        var v = from + (target - from) * eased;
+        out.textContent = fmt.format(Math.round(v));
+        if (p < 1) rafId = requestAnimationFrame(frame);
+        else { currentValue = target; out.textContent = fmt.format(Math.round(target)); }
+      }
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 
     function recalc() {
-      var leads = Math.max(0, parseFloat(leadsEl.value) || 0);
-      var val = Math.max(0, parseFloat(valueEl.value) || 0);
-      var rate = Math.max(0, Math.min(100, parseFloat(rateEl.value) || 0));
+      var leadsRaw = parseFloat(leadsEl.value);
+      var valRaw = parseFloat(valueEl.value);
+      var rate = clamp(parseFloat(rateEl.value) || 0, 0, 100);
+
+      var leads = clamp(isNaN(leadsRaw) ? 0 : leadsRaw, 0, 2000);
+      var val = clamp(isNaN(valRaw) ? 0 : valRaw, 0, 20000);
+
+      rateOut.textContent = Math.round(rate) + '%';
+
+      if (leads === 0 || val === 0) {
+        animateTo(0);
+        tag.textContent = 'Enter your numbers above';
+        annual.textContent = '';
+        return;
+      }
+
       var gap = Math.max(0, (58 - rate) / 100);
       var missed = leads * val * gap;
-      out.textContent = fmt.format(Math.round(missed));
-      rateOut.textContent = Math.round(rate) + '%';
+      animateTo(missed);
+      tag.textContent = DEFAULT_TAG;
+      annual.textContent = fmt.format(Math.round(missed * 12)) + ' across a year';
     }
 
     ['input', 'change'].forEach(function (ev) {
