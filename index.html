@@ -1321,97 +1321,163 @@
     position: relative;
   }
 
-  .steps {
+  .system {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--space-7);
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .system { grid-template-columns: 1fr; gap: var(--space-5); }
+  }
+
+  .system-tabs {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 920px;
-    margin: 0 auto;
+    gap: var(--space-2);
   }
 
-  .step {
-    display: grid;
-    grid-template-columns: 64px 1fr auto;
-    gap: 28px;
-    align-items: center;
-    padding: 28px 32px;
-    background: var(--bg-3);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    transition: all 0.3s;
-    position: relative;
-  }
-
-  .step:hover {
-    border-color: var(--line-2);
-    transform: translateX(6px);
-  }
-
-  @media (max-width: 720px) {
-    .step {
-      grid-template-columns: 56px 1fr;
-      gap: 20px;
-      padding: 24px;
+  @media (max-width: 880px) {
+    .system-tabs {
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin: 0 calc(-1 * var(--space-5));
+      padding: 0 var(--space-5) var(--space-2);
+      scrollbar-width: none;
     }
-    .step-trigger-tag { display: none; }
+    .system-tabs::-webkit-scrollbar { display: none; }
   }
 
-  .step-num {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-    box-shadow: 0 8px 24px var(--accent-glow);
-    flex-shrink: 0;
+  .system-tab {
+    text-align: left;
+    background: transparent;
+    border: 1px solid transparent;
+    border-left: 2px solid transparent;
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background-color var(--duration-base) var(--ease-out),
+                color var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) var(--ease-out);
+    font-family: inherit;
+    display: block;
+    width: 100%;
   }
 
-  @media (max-width: 720px) {
-    .step-num {
-      width: 56px;
-      height: 56px;
-      font-size: 20px;
+  @media (max-width: 880px) {
+    .system-tab {
+      flex-shrink: 0;
+      min-width: 220px;
+      scroll-snap-align: start;
+      border-left: 1px solid var(--color-border-subtle);
     }
   }
 
-  .step-trigger {
-    font-size: 12px;
-    color: var(--accent);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 6px;
+  .system-tab:hover:not(.is-active) {
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
   }
 
-  .step h3 {
-    color: var(--text);
-    font-size: 19px;
-    line-height: 1.3;
-    margin-bottom: 8px;
+  .system-tab.is-active {
+    background: var(--color-bg-surface);
+    border-color: var(--color-border-subtle);
+    border-left-color: var(--color-accent-primary);
+    color: var(--color-text-primary);
   }
 
-  .step p {
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.55;
-  }
-
-  .step-trigger-tag {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 11px;
-    color: var(--text-2);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .system-tab-label {
+    font-size: var(--type-micro);
     font-weight: 600;
-    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent-primary);
+    margin-bottom: 4px;
+  }
+
+  .system-tab-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: inherit;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .system-tab-sub {
+    font-size: var(--type-caption);
+    color: var(--color-text-tertiary);
+    line-height: 1.4;
+  }
+
+  .system-tab.is-active .system-tab-sub { color: var(--color-text-secondary); }
+
+  .system-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .system-flow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--space-2);
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .flow-chip {
+    flex: 1;
+    min-width: 110px;
+    padding: 10px 12px;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    text-align: left;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  .flow-chip .label {
+    display: block;
+    font-size: var(--type-micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .flow-chip .value {
+    display: block;
+    font-size: var(--type-caption);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .flow-sep {
+    align-self: center;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  @media (max-width: 520px) {
+    .system-flow { flex-direction: column; align-items: stretch; }
+    .flow-chip { min-width: 0; }
+    .flow-sep { transform: rotate(90deg); align-self: center; }
+  }
+
+  .system-phone-stage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   /* ============ WHY US ============ */
@@ -2406,54 +2472,71 @@
   </div>
 </section>
 
-<!-- ===== SOLUTION ===== -->
-<section class="solution">
+<!-- ===== SOLUTION (interactive tabs) ===== -->
+<section class="solution" id="system">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">The system</span>
       <h2>Four automations. <span class="serif">One system.</span></h2>
-      <p>Built specifically for detailing shops. Plain English. Zero tech jargon.</p>
+      <p>Tap a trigger to see the automation run.</p>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div>
-          <div class="step-trigger">Trigger: Missed call</div>
-          <h3>Auto-text in 60 seconds: "Sorry we missed you — what service were you calling about?"</h3>
-          <p>Most callers will text but won't leave a voicemail. You catch them before they call the next shop.</p>
-        </div>
-        <div class="step-trigger-tag">SMS · Live</div>
+    <div class="system">
+      <div class="system-tabs" role="tablist" aria-label="Automations">
+        <button class="system-tab is-active" type="button" role="tab" aria-selected="true" data-tab="0">
+          <div class="system-tab-label">Trigger 01</div>
+          <div class="system-tab-title">Missed call</div>
+          <div class="system-tab-sub">Auto-text reply in 60 seconds.</div>
+        </button>
+        <button class="system-tab" type="button" role="tab" aria-selected="false" data-tab="1">
+          <div class="system-tab-label">Trigger 02</div>
+          <div class="system-tab-title">Quote request</div>
+          <div class="system-tab-sub">14-day SMS + email follow-up.</div>
+        </button>
+        <button class="system-tab" type="button" role="tab" aria-selected="false" data-tab="2">
+          <div class="system-tab-label">Trigger 03</div>
+          <div class="system-tab-title">Job complete</div>
+          <div class="system-tab-sub">Smart-routed review request.</div>
+        </button>
+        <button class="system-tab" type="button" role="tab" aria-selected="false" data-tab="3">
+          <div class="system-tab-label">Trigger 04</div>
+          <div class="system-tab-title">Coating install</div>
+          <div class="system-tab-sub">Annual rebook at month 11.</div>
+        </button>
       </div>
 
-      <div class="step">
-        <div class="step-num">2</div>
-        <div>
-          <div class="step-trigger">Trigger: Quote request</div>
-          <h3>14-day SMS + email follow-up. Until they book or opt out.</h3>
-          <p>Day 1, 3, 5, 8, 11, 14. Friendly, on-brand, written for detailing customers. Stops the second they reply.</p>
+      <div class="system-preview">
+        <div class="system-flow" id="system-flow" aria-live="polite">
+          <div class="flow-chip"><span class="label">Trigger</span><span class="value" data-flow="trigger">—</span></div>
+          <span class="flow-sep">→</span>
+          <div class="flow-chip"><span class="label">Wait</span><span class="value" data-flow="wait">—</span></div>
+          <span class="flow-sep">→</span>
+          <div class="flow-chip"><span class="label">Action</span><span class="value" data-flow="action">—</span></div>
+          <span class="flow-sep">→</span>
+          <div class="flow-chip"><span class="label">Outcome</span><span class="value" data-flow="outcome">—</span></div>
         </div>
-        <div class="step-trigger-tag">Multi-channel</div>
-      </div>
 
-      <div class="step">
-        <div class="step-num">3</div>
-        <div>
-          <div class="step-trigger">Trigger: Job complete</div>
-          <h3>Automatic Google review request the next morning.</h3>
-          <p>5-star sentiment goes straight to Google. Sub-5-star routes to a private feedback flow you actually see and can act on.</p>
+        <div class="phone-stage system-phone-stage">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-statusbar" aria-hidden="true">
+                <span>9:41</span>
+                <span class="glyphs">
+                  <svg width="14" height="9" viewBox="0 0 14 9" fill="currentColor"><rect x="0" y="6" width="2" height="3" rx="0.5"/><rect x="4" y="4" width="2" height="5" rx="0.5"/><rect x="8" y="2" width="2" height="7" rx="0.5"/><rect x="12" y="0" width="2" height="9" rx="0.5"/></svg>
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1.5 4.2a8 8 0 0 1 11 0"/><path d="M3.5 6.4a5 5 0 0 1 7 0"/><circle cx="7" cy="8.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+                  <svg width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="16" height="9" rx="2"/><rect x="2" y="2" width="11" height="6" rx="1" fill="currentColor"/><rect x="17.5" y="3.5" width="1.5" height="3" rx="0.5" fill="currentColor"/></svg>
+                </span>
+              </div>
+              <div class="phone-contact">
+                <div class="phone-avatar" id="system-avatar">M</div>
+                <div class="name" id="system-name">Mike (Customer)</div>
+                <div class="biz" id="system-biz">+1 (703) 555-0182</div>
+              </div>
+              <div class="msg-meta" id="system-meta">📞 Missed call · 9:38 AM</div>
+              <div class="msg-thread" id="system-thread" aria-live="polite"></div>
+            </div>
+          </div>
         </div>
-        <div class="step-trigger-tag">Smart routing</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">4</div>
-        <div>
-          <div class="step-trigger">Trigger: Coating install</div>
-          <h3>Annual rebook reminder at month 11.</h3>
-          <p>Tagged the day they pay. Auto-touchpoints at 9, 11, and 12 months. ~22% rebook rate from work you already did.</p>
-        </div>
-        <div class="step-trigger-tag">Recurring revenue</div>
       </div>
     </div>
   </div>
@@ -2872,7 +2955,12 @@
     }
 
     start();
-    return { start: start, stop: stop, restart: function () { stop(); start(); } };
+    return {
+      start: start,
+      stop: stop,
+      restart: function () { stop(); start(); },
+      setScript: function (next) { stop(); script = next || []; start(); }
+    };
   };
 
   // ===== Reusable count-up =====
@@ -2941,6 +3029,139 @@
       { side: 'you', text: 'Got it. Sending pricing now + can book you in this week. What day works best?' }
     ]
   });
+
+  // ===== System interactive tabs =====
+  (function () {
+    var section = document.getElementById('system');
+    if (!section) return;
+    var threadEl = document.getElementById('system-thread');
+    var tabs = Array.prototype.slice.call(section.querySelectorAll('.system-tab'));
+    if (!threadEl || !tabs.length) return;
+
+    var avatar = document.getElementById('system-avatar');
+    var nameEl = document.getElementById('system-name');
+    var bizEl = document.getElementById('system-biz');
+    var metaEl = document.getElementById('system-meta');
+    var flowEl = document.getElementById('system-flow');
+
+    var data = [
+      {
+        flow: { trigger: 'Phone call missed', wait: '60 seconds', action: 'Auto-text reply', outcome: 'Quote sent' },
+        contact: { avatar: 'M', name: 'Mike (Customer)', biz: '+1 (703) 555-0182' },
+        meta: '📞 Missed call · 9:38 AM',
+        script: [
+          { side: 'you', text: 'Hey Mike — sorry we missed you at the shop. What service were you calling about?', metaAfter: '9:38 AM · Auto-sent' },
+          { side: 'them', text: 'looking for ceramic coating quote for my model 3' },
+          { side: 'you', text: 'Got it. Sending pricing now + can book you in this week. What day works best?' }
+        ]
+      },
+      {
+        flow: { trigger: 'Quote form submitted', wait: 'Day 1 → Day 5', action: 'SMS + nudge', outcome: 'Booking' },
+        contact: { avatar: 'S', name: 'Sarah (Quote request)', biz: 'sarah@bma.com' },
+        meta: '📝 New quote request · Day 1',
+        script: [
+          { side: 'you', text: 'Hey Sarah — thanks for the quote request on the 3-stage correction. Pricing + my next 3 slots below.', metaAfter: 'Day 1 · Auto-sent' },
+          { side: 'you', text: 'Quick check-in — did the quote land OK? Happy to walk you through it.', metaAfter: 'Day 5 · Nudge' },
+          { side: 'them', text: 'yes book it for thursday please' },
+          { side: 'you', text: 'Locked in — Thursday 9am. See you then.' }
+        ]
+      },
+      {
+        flow: { trigger: 'Job marked complete', wait: '1 hour', action: 'Review ask', outcome: '5★ on Google' },
+        contact: { avatar: 'M', name: 'Mike (Customer)', biz: '+1 (703) 555-0182' },
+        meta: '✓ Job complete · 6:14 PM',
+        script: [
+          { side: 'you', text: 'Thanks for trusting us with the Tesla today, Mike 🙏 How\'d we do?', metaAfter: '6:14 PM · Auto-sent' },
+          { side: 'them', text: '⭐⭐⭐⭐⭐ looked brand new, you guys are the best' },
+          { side: 'you', text: 'Means a lot. Mind dropping that on Google? Takes 30 seconds 👉 g.page/r/...', metaAfter: 'Routed: 5★ → Google' }
+        ]
+      },
+      {
+        flow: { trigger: 'Coating sold (today)', wait: '11 months', action: 'Auto rebook nudge', outcome: 'Annual decon booked' },
+        contact: { avatar: 'M', name: 'Mike (Customer)', biz: '+1 (703) 555-0182' },
+        meta: '📅 Coating install · Month 11',
+        script: [
+          { side: 'you', text: 'Hey Mike — your ceramic install hits 11 months Thursday. Time for the annual decon.', metaAfter: 'Auto-sent · Month 11' },
+          { side: 'them', text: 'oh wow already? yeah let\'s do it' },
+          { side: 'you', text: 'Got you. Holding your usual Tuesday 9am slot. Reply CONFIRM to lock it in.' },
+          { side: 'them', text: 'CONFIRM' }
+        ]
+      }
+    ];
+
+    var current = -1;
+    var thread = null;
+    var inView = false;
+    var autoTimer = null;
+    var overrideUntil = 0;
+    var hovering = false;
+    var AUTO_MS = 8000;
+    var OVERRIDE_MS = 30000;
+
+    function setFlow(d) {
+      if (!flowEl) return;
+      flowEl.querySelector('[data-flow="trigger"]').textContent = d.trigger;
+      flowEl.querySelector('[data-flow="wait"]').textContent = d.wait;
+      flowEl.querySelector('[data-flow="action"]').textContent = d.action;
+      flowEl.querySelector('[data-flow="outcome"]').textContent = d.outcome;
+    }
+
+    function setHeader(d) {
+      if (avatar) avatar.textContent = d.avatar;
+      if (nameEl) nameEl.textContent = d.name;
+      if (bizEl) bizEl.textContent = d.biz;
+    }
+
+    function activate(i, manual) {
+      if (i === current) return;
+      tabs.forEach(function (t, idx) {
+        var active = idx === i;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      var d = data[i];
+      setFlow(d.flow);
+      setHeader(d.contact);
+      if (metaEl) metaEl.textContent = d.meta;
+      if (!thread) {
+        thread = ShopFlowThread(threadEl, { script: d.script, observe: section });
+      } else {
+        thread.setScript(d.script);
+      }
+      current = i;
+      if (manual) overrideUntil = Date.now() + OVERRIDE_MS;
+    }
+
+    function tick() {
+      if (!inView || hovering || Date.now() < overrideUntil) return;
+      activate((current + 1) % data.length, false);
+    }
+
+    function startAuto() { if (autoTimer) return; autoTimer = setInterval(tick, AUTO_MS); }
+    function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+
+    tabs.forEach(function (t, idx) {
+      t.addEventListener('click', function () { activate(idx, true); });
+    });
+
+    section.addEventListener('mouseenter', function () { hovering = true; }, true);
+    section.addEventListener('mouseleave', function () { hovering = false; }, true);
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          inView = e.isIntersecting;
+          if (inView) startAuto(); else stopAuto();
+        });
+      }, { threshold: 0.25 });
+      io.observe(section);
+    } else {
+      inView = true;
+      startAuto();
+    }
+
+    activate(0, false);
+  })();
 
   // ===== Qualification form =====
   (function () {
