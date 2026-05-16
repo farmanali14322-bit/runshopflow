@@ -2070,86 +2070,6 @@
     transform: none;
   }
 
-  /* ============ EXIT-INTENT MODAL ============ */
-  .exit-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    opacity: 0;
-    transition: opacity 0.2s ease-out;
-  }
-
-  .exit-modal.open { display: flex; opacity: 1; }
-
-  .exit-modal-card {
-    background: var(--bg-2);
-    border: 1px solid var(--line-2);
-    border-radius: 18px;
-    padding: 36px;
-    max-width: 460px;
-    width: 100%;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    position: relative;
-    transform: translateY(12px);
-    transition: transform 0.25s ease-out;
-  }
-
-  .exit-modal.open .exit-modal-card { transform: translateY(0); }
-
-  .exit-modal-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--muted);
-    font-size: 18px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.15s, border-color 0.15s;
-  }
-
-  .exit-modal-close:hover { color: var(--text); border-color: var(--line-2); }
-
-  .exit-modal h3 {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .exit-modal p.sub {
-    color: var(--text-2);
-    font-size: 15px;
-    line-height: 1.55;
-    margin-bottom: 22px;
-  }
-
-  .exit-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .exit-form .btn { width: 100%; }
-
-  .exit-thanks { text-align: center; padding: 6px 0; }
-  .exit-thanks h4 { font-size: 18px; margin-bottom: 6px; }
-  .exit-thanks p { color: var(--muted); font-size: 14px; }
-
   /* ============ STICKY MOBILE CTA ============ */
   .mobile-cta {
     position: fixed;
@@ -2995,26 +2915,6 @@
   </div>
 </footer>
 
-<!-- ===== EXIT-INTENT MODAL ===== -->
-<div class="exit-modal" id="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-hidden="true">
-  <div class="exit-modal-card">
-    <button class="exit-modal-close" id="exit-close" aria-label="Close">×</button>
-    <h3 id="exit-title">Wait — grab the audit checklist</h3>
-    <p class="sub">The 1-page framework we use to find leaks in any detailing shop.</p>
-    <form class="exit-form" id="exit-form" novalidate>
-      <input class="qual-input" id="exit-email" name="email" type="email" placeholder="you@shop.com" autocomplete="email" required>
-      <button class="btn" type="submit" id="exit-submit">
-        Send it
-        <span class="btn-arrow">→</span>
-      </button>
-    </form>
-    <div class="exit-thanks" id="exit-thanks" hidden>
-      <h4>Sent.</h4>
-      <p>Check your inbox.</p>
-    </div>
-  </div>
-</div>
-
 <!-- ===== STICKY MOBILE CTA ===== -->
 <div class="mobile-cta" id="mobile-cta" aria-hidden="true">
   <a href="https://cal.com/farman-ali-hluli0/15min" class="btn" target="_blank" rel="noopener">
@@ -3502,71 +3402,6 @@
     else if (mq.addListener) mq.addListener(apply);
 
     apply();
-  })();
-
-  // ===== Exit-intent modal (desktop only) =====
-  (function () {
-    var modal = document.getElementById('exit-modal');
-    var closeBtn = document.getElementById('exit-close');
-    var form = document.getElementById('exit-form');
-    var thanks = document.getElementById('exit-thanks');
-    var emailEl = document.getElementById('exit-email');
-    var submit = document.getElementById('exit-submit');
-    if (!modal || !closeBtn || !form) return;
-
-    var STORAGE_KEY = 'shopflow-exit-shown';
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
-    if (window.innerWidth <= 1024) return;
-
-    var armed = false;
-    setTimeout(function () { armed = true; }, 3000);
-
-    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var opened = false;
-
-    function open() {
-      if (opened) return;
-      opened = true;
-      sessionStorage.setItem(STORAGE_KEY, '1');
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      setTimeout(function () { emailEl && emailEl.focus(); }, 50);
-    }
-
-    function close() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-
-    function onMouseOut(e) {
-      if (!armed || opened) return;
-      if (e.clientY <= 0 && !e.relatedTarget && !e.toElement) open();
-    }
-
-    document.addEventListener('mouseout', onMouseOut);
-
-    closeBtn.addEventListener('click', close);
-    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('open')) close();
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = (emailEl.value || '').trim();
-      if (!emailRe.test(email)) { emailEl.focus(); return; }
-      submit.disabled = true;
-      submit.style.opacity = '0.7';
-
-      fetch('/api/lead-checklist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
-      }).catch(function () {}).finally(function () {
-        form.hidden = true;
-        thanks.hidden = false;
-      });
-    });
   })();
 
   // ===== Scroll-triggered reveals with optional stagger =====
