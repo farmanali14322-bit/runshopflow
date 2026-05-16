@@ -820,193 +820,114 @@
     border-bottom: 1px solid var(--line);
   }
 
-  .proof-card {
-    background:
-      linear-gradient(180deg, var(--bg-3), var(--bg-2));
-    border: 1px solid var(--line-2);
-    border-radius: 20px;
-    overflow: hidden;
-    max-width: 1040px;
-    margin: 0 auto;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
-  }
-
-  .proof-card-head {
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
+  .case-meta {
+    text-align: center;
+    margin: calc(-1 * var(--space-5)) auto var(--space-7);
+    font-size: var(--type-caption);
+    color: var(--color-text-tertiary);
+    display: inline-flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    background: var(--bg-3);
+    gap: var(--space-3);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-elevated);
   }
 
-  .proof-card-name {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-    font-size: 16px;
-  }
+  .case-meta-wrap { text-align: center; margin-bottom: var(--space-7); }
 
-  .proof-card-name .badge {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 800;
-  }
-
-  .proof-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--money);
-    background: var(--money-bg);
-    padding: 6px 12px;
-    border-radius: 100px;
-    border: 1px solid rgba(74, 222, 128, 0.2);
-    font-weight: 500;
-  }
-
-  .proof-card-meta .live {
+  .case-meta .live {
     width: 6px;
     height: 6px;
-    background: var(--money);
     border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 8px var(--color-success);
     animation: pulse 2s ease-in-out infinite;
   }
 
-  .proof-stats {
+  .case-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    max-width: 1080px;
+    margin: 0 auto;
   }
 
-  @media (max-width: 720px) {
-    .proof-stats { grid-template-columns: 1fr; }
+  @media (max-width: 880px) { .case-stats { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 460px) { .case-stats { grid-template-columns: 1fr; } }
+
+  .case-stat {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5) var(--space-5);
+    transition: border-color var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
   }
 
-  .proof-stat {
-    padding: 36px 32px;
-    border-right: 1px solid var(--line);
+  .case-stat:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
   }
 
-  .proof-stat:last-child { border-right: none; }
-
-  @media (max-width: 720px) {
-    .proof-stat {
-      border-right: none;
-      border-bottom: 1px solid var(--line);
-    }
-    .proof-stat:last-child { border-bottom: none; }
-  }
-
-  .proof-stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 18px;
+  .case-stat-label {
+    font-size: var(--type-micro);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-4);
   }
 
-  .proof-stat-row {
+  .case-stat-row {
     display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 
-  .proof-before {
-    font-size: 22px;
-    color: var(--muted-2);
+  .case-stat-before {
+    font-size: var(--type-caption);
+    color: var(--color-text-muted);
     text-decoration: line-through;
     font-weight: 500;
   }
 
-  .proof-arrow {
-    color: var(--muted);
-    font-size: 16px;
-  }
-
-  .proof-after {
-    font-size: 44px;
+  .case-stat-after {
+    font-size: clamp(32px, 3.6vw, 44px);
     font-weight: 800;
-    color: var(--money);
-    letter-spacing: -0.03em;
-    line-height: 1;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    background: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
   }
 
-  .proof-recovered {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    padding: 28px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    position: relative;
-    overflow: hidden;
+  .case-quote {
+    max-width: 760px;
+    margin: var(--space-7) auto 0;
+    padding: var(--space-5) 0;
+    text-align: center;
   }
 
-  .proof-recovered::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 80% 50%, rgba(255,255,255,0.15), transparent 50%);
-  }
-
-  .proof-recovered-label {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.9;
-    position: relative;
-  }
-
-  .proof-recovered-num {
-    font-size: 40px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    position: relative;
-  }
-
-  .proof-quote {
-    margin-top: 36px;
-    max-width: 1040px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 32px;
-    background: var(--bg-3);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 14px 14px 0;
-  }
-
-  .proof-quote-text {
-    font-size: 19px;
-    line-height: 1.5;
-    color: var(--text);
-    margin-bottom: 14px;
-    font-family: 'Instrument Serif', serif;
+  .case-quote-text {
+    font-family: 'Instrument Serif', Georgia, serif;
     font-style: italic;
-    font-weight: 400;
+    font-size: var(--type-body-lg);
+    line-height: 1.55;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
     letter-spacing: -0.005em;
   }
 
-  .proof-quote-attr {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
+  .case-quote-attr {
+    font-size: var(--type-caption);
+    color: var(--color-text-tertiary);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
+    font-weight: 500;
   }
 
   /* ============ PROBLEM SECTION ============ */
@@ -2285,64 +2206,59 @@
   </div>
 </section>
 
-<!-- ===== PROOF ===== -->
+<!-- ===== CASE STUDY ===== -->
 <section class="proof" id="case-study">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Live case study</span>
-      <h2>Same shop. Same staff. <span class="serif">3x the booked jobs.</span></h2>
-      <p>Same lead volume coming in. The system did the rest.</p>
+      <h2>Same shop. Same staff. <span class="stat-gradient">3×</span> <span class="serif">the booked jobs.</span></h2>
     </div>
 
-    <div class="proof-card">
-      <div class="proof-card-head">
-        <div class="proof-card-name">
-          <div class="badge">★</div>
-          <span>5-bay detailing shop · Fairfax, VA</span>
-        </div>
-        <div class="proof-card-meta">
-          <span class="live"></span>
-          Live 11+ months
+    <div class="case-meta-wrap">
+      <span class="case-meta">
+        <span class="live"></span>
+        5-bay detailing shop · Fairfax, VA · Live 11+ months
+      </span>
+    </div>
+
+    <div class="case-stats">
+      <div class="case-stat">
+        <div class="case-stat-label">Quote close rate</div>
+        <div class="case-stat-row">
+          <span class="case-stat-before">22%</span>
+          <span class="case-stat-after" data-count-to="58" data-suffix="%">58%</span>
         </div>
       </div>
 
-      <div class="proof-stats">
-        <div class="proof-stat">
-          <div class="proof-stat-label">Quote close rate</div>
-          <div class="proof-stat-row">
-            <span class="proof-before">22%</span>
-            <span class="proof-arrow">→</span>
-            <span class="proof-after">58%</span>
-          </div>
-        </div>
-        <div class="proof-stat">
-          <div class="proof-stat-label">Monthly revenue</div>
-          <div class="proof-stat-row">
-            <span class="proof-before">$11.4k</span>
-            <span class="proof-arrow">→</span>
-            <span class="proof-after">$30.1k</span>
-          </div>
-        </div>
-        <div class="proof-stat">
-          <div class="proof-stat-label">Owner time on follow-up</div>
-          <div class="proof-stat-row">
-            <span class="proof-before">~30 min/day</span>
-            <span class="proof-arrow">→</span>
-            <span class="proof-after">0</span>
-          </div>
+      <div class="case-stat">
+        <div class="case-stat-label">Monthly revenue</div>
+        <div class="case-stat-row">
+          <span class="case-stat-before">$11.4k</span>
+          <span class="case-stat-after" data-count-to="30.1" data-prefix="$" data-suffix="k" data-decimals="1">$30.1k</span>
         </div>
       </div>
 
-      <div class="proof-recovered">
-        <span class="proof-recovered-label">Recovered revenue / month</span>
-        <span class="proof-recovered-num">+$18,720</span>
+      <div class="case-stat">
+        <div class="case-stat-label">Recovered revenue / mo</div>
+        <div class="case-stat-row">
+          <span class="case-stat-before">$0</span>
+          <span class="case-stat-after" data-count-to="18720" data-prefix="+$" data-comma="1">+$18,720</span>
+        </div>
+      </div>
+
+      <div class="case-stat">
+        <div class="case-stat-label">Owner time on follow-up</div>
+        <div class="case-stat-row">
+          <span class="case-stat-before">~30 min/day</span>
+          <span class="case-stat-after">0 min</span>
+        </div>
       </div>
     </div>
 
-    <div class="proof-quote">
-      <p class="proof-quote-text">"Best money I've spent on the business in three years. The system caught $19k in jobs my staff would've missed last month alone."</p>
-      <p class="proof-quote-attr">— Owner, 5-bay detailing shop in Fairfax, VA</p>
-    </div>
+    <blockquote class="case-quote">
+      <p class="case-quote-text">&ldquo;Best money I've spent on the business in three years. The system caught $19k in jobs my staff would've missed last month alone.&rdquo;</p>
+      <p class="case-quote-attr">— Owner, 5-bay detailing shop, Fairfax, VA</p>
+    </blockquote>
   </div>
 </section>
 
@@ -2895,6 +2811,64 @@
     start();
     return { start: start, stop: stop, restart: function () { stop(); start(); } };
   };
+
+  // ===== Reusable count-up =====
+  window.shopflowCountUp = function (el) {
+    if (!el) return;
+    if (el.__counted) return;
+    el.__counted = true;
+    var to = parseFloat(el.getAttribute('data-count-to'));
+    if (isNaN(to)) return;
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var comma = el.getAttribute('data-comma') === '1';
+    var ms = parseInt(el.getAttribute('data-ms') || '300', 10);
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function format(n) {
+      var s = decimals ? n.toFixed(decimals) : String(Math.round(n));
+      if (comma) {
+        var parts = s.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        s = parts.join('.');
+      }
+      return prefix + s + suffix;
+    }
+
+    if (reduce || ms <= 0) { el.textContent = format(to); return; }
+
+    var start = null;
+    function frame(t) {
+      if (start === null) start = t;
+      var p = Math.min(1, (t - start) / ms);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = format(to * eased);
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = format(to);
+    }
+    requestAnimationFrame(frame);
+  };
+
+  // Trigger count-ups on the case study when it enters the viewport
+  (function () {
+    var stats = document.querySelector('.case-stats');
+    if (!stats) return;
+    if (!('IntersectionObserver' in window)) {
+      stats.querySelectorAll('[data-count-to]').forEach(window.shopflowCountUp);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          stats.querySelectorAll('[data-count-to]').forEach(window.shopflowCountUp);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(stats);
+  })();
 
   // Hero instance
   ShopFlowThread(document.getElementById('hero-thread'), {
