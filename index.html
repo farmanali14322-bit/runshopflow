@@ -1923,10 +1923,13 @@
   }
 
   .qual-submit {
-    margin-top: 8px;
+    margin-top: var(--space-2);
     grid-column: 1 / -1;
     width: 100%;
   }
+
+  .qual-submit.is-loading { opacity: 0.7; cursor: progress; }
+  .qual-submit:disabled { cursor: not-allowed; }
 
   .qual-fine {
     grid-column: 1 / -1;
@@ -2717,8 +2720,8 @@
         </div>
 
         <div class="qual-card">
-          <div class="qual-card-title">Prefer we reach out?</div>
-          <div class="qual-card-sub">Drop your info and we'll send a teardown by email within 48 hours.</div>
+          <div class="qual-card-title">Not ready to talk yet? Send us your details first.</div>
+          <div class="qual-card-sub">We'll review and reach back within 24 hours.</div>
 
           <form class="qual-form" id="qual-form" novalidate>
             <div class="qual-field full">
@@ -2765,7 +2768,7 @@
             </div>
 
             <button class="btn qual-submit" type="submit" id="qual-submit">
-              Send my info
+              Send details
               <span class="btn-arrow">→</span>
             </button>
 
@@ -2774,8 +2777,8 @@
 
           <div class="qual-thanks" id="qual-thanks" hidden>
             <div class="check">✓</div>
-            <h4>Got it — thanks.</h4>
-            <p>We'll have something useful in your inbox within 48 hours.</p>
+            <h4>Got it.</h4>
+            <p>We'll review and reach out within 24 hrs.</p>
           </div>
         </div>
       </div>
@@ -3281,18 +3284,29 @@
       var err = form.querySelector('.qual-error');
       if (err) err.remove();
       submit.disabled = true;
-      submit.style.opacity = '0.7';
-      submit.firstChild.textContent = 'Sending… ';
+      submit.classList.add('is-loading');
+      var labelNode = submit.firstChild;
+      var originalLabel = labelNode.textContent;
+      labelNode.textContent = 'Sending… ';
+
+      function resetSubmit() {
+        submit.disabled = false;
+        submit.classList.remove('is-loading');
+        labelNode.textContent = originalLabel;
+      }
 
       fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-      }).catch(function () {
-        // Placeholder endpoint — silent on failure for now.
-      }).finally(function () {
+      }).then(function (res) {
+        if (!res.ok) throw new Error('Request failed (' + res.status + ')');
         form.hidden = true;
         thanks.hidden = false;
+      }).catch(function () {
+        // TODO: wire real /api/lead handler; this surfaces the error to the user.
+        resetSubmit();
+        showError('We couldn’t send that just now — please retry, or email us directly at farman@runshopflow.com.');
       });
     });
   })();
