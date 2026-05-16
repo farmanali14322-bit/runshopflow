@@ -2119,32 +2119,35 @@
   /* ============ STICKY MOBILE CTA ============ */
   .mobile-cta {
     position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
     z-index: 90;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    padding: var(--space-3);
     background: rgba(10, 10, 11, 0.92);
     backdrop-filter: saturate(140%) blur(14px);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
-    border-top: 1px solid var(--line);
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.45);
-    transform: translateY(110%);
-    transition: transform 0.3s ease-out;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5), var(--shadow-md);
+    transform: translateY(calc(100% + var(--space-5)));
+    transition: transform 350ms var(--ease-out), opacity 350ms var(--ease-out);
+    opacity: 0;
     display: none;
   }
 
-  .mobile-cta.visible { transform: translateY(0); }
+  .mobile-cta.visible { transform: translateY(0); opacity: 1; }
 
   .mobile-cta .btn {
     width: 100%;
-    padding: 16px 22px;
-    font-size: 15px;
+    padding: 14px 20px;
+    font-size: var(--type-body);
+    border-radius: var(--radius-md);
   }
 
   @media (max-width: 767px) {
     .mobile-cta { display: block; }
-    body.has-mobile-cta { padding-bottom: 80px; }
+    body.has-mobile-cta { padding-bottom: 88px; }
   }
 
   /* ============ FAQ ============ */
@@ -2855,18 +2858,18 @@
 <div class="exit-modal" id="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-hidden="true">
   <div class="exit-modal-card">
     <button class="exit-modal-close" id="exit-close" aria-label="Close">×</button>
-    <h3 id="exit-title">Before you go — grab the 1-page Audit Checklist</h3>
-    <p class="sub">The exact framework we use to find the leaks in any detailing shop.</p>
+    <h3 id="exit-title">Wait — grab the audit checklist</h3>
+    <p class="sub">The 1-page framework we use to find leaks in any detailing shop.</p>
     <form class="exit-form" id="exit-form" novalidate>
       <input class="qual-input" id="exit-email" name="email" type="email" placeholder="you@shop.com" autocomplete="email" required>
       <button class="btn" type="submit" id="exit-submit">
-        Send me the checklist
+        Send it
         <span class="btn-arrow">→</span>
       </button>
     </form>
     <div class="exit-thanks" id="exit-thanks" hidden>
-      <h4>On its way.</h4>
-      <p>Check your inbox in the next few minutes.</p>
+      <h4>Sent.</h4>
+      <p>Check your inbox.</p>
     </div>
   </div>
 </div>
@@ -3315,11 +3318,12 @@
   (function () {
     var bar = document.getElementById('mobile-cta');
     var finalEl = document.getElementById('book');
+    var heroEl = document.querySelector('.hero');
     if (!bar || !finalEl) return;
 
     var mq = window.matchMedia('(max-width: 767px)');
     var finalInView = false;
-    var io = null;
+    var pastHero = false;
 
     function apply() {
       if (!mq.matches) {
@@ -3329,17 +3333,28 @@
         return;
       }
       document.body.classList.add('has-mobile-cta');
-      var show = !finalInView;
+      var show = pastHero && !finalInView;
       bar.classList.toggle('visible', show);
       bar.setAttribute('aria-hidden', show ? 'false' : 'true');
     }
 
     if ('IntersectionObserver' in window) {
-      io = new IntersectionObserver(function (entries) {
+      new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { finalInView = e.isIntersecting; });
         apply();
-      }, { threshold: 0.15 });
-      io.observe(finalEl);
+      }, { threshold: 0.15 }).observe(finalEl);
+
+      if (heroEl) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) { pastHero = true; apply(); }
+          });
+        }, { threshold: 0 }).observe(heroEl);
+      } else {
+        pastHero = true;
+      }
+    } else {
+      pastHero = true;
     }
 
     if (mq.addEventListener) mq.addEventListener('change', apply);
