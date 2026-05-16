@@ -495,46 +495,42 @@
   .phone {
     width: 320px;
     background: linear-gradient(180deg, #1A1A1F, #131316);
-    border: 1px solid var(--line-2);
-    border-radius: 36px;
-    padding: 14px;
-    box-shadow:
-      0 32px 80px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-xl);
+    padding: 12px;
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.04);
     position: relative;
-  }
-
-  .phone::before {
-    content: '';
-    position: absolute;
-    top: 26px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 24px;
-    background: var(--bg);
-    border-radius: 100px;
-    z-index: 5;
   }
 
   .phone-screen {
     background: #08080A;
-    border-radius: 24px;
-    padding: 50px 16px 16px;
+    border-radius: 18px;
+    padding: 14px 14px 16px;
     min-height: 520px;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .phone-time {
+  .phone-statusbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px 6px;
     font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    margin-bottom: 6px;
-    font-weight: 500;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
+
+  .phone-statusbar .glyphs {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.7;
+  }
+
+  .phone-statusbar .glyphs svg { display: block; }
 
   .phone-contact {
     text-align: center;
@@ -2232,7 +2228,14 @@
 
         <div class="phone">
           <div class="phone-screen">
-            <div class="phone-time">9:41</div>
+            <div class="phone-statusbar" aria-hidden="true">
+              <span>9:41</span>
+              <span class="glyphs">
+                <svg width="14" height="9" viewBox="0 0 14 9" fill="currentColor"><rect x="0" y="6" width="2" height="3" rx="0.5"/><rect x="4" y="4" width="2" height="5" rx="0.5"/><rect x="8" y="2" width="2" height="7" rx="0.5"/><rect x="12" y="0" width="2" height="9" rx="0.5"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1.5 4.2a8 8 0 0 1 11 0"/><path d="M3.5 6.4a5 5 0 0 1 7 0"/><circle cx="7" cy="8.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+                <svg width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="16" height="9" rx="2"/><rect x="2" y="2" width="11" height="6" rx="1" fill="currentColor"/><rect x="17.5" y="3.5" width="1.5" height="3" rx="0.5" fill="currentColor"/></svg>
+              </span>
+            </div>
             <div class="phone-contact">
               <div class="phone-avatar">M</div>
               <div class="name">Mike (Customer)</div>
@@ -2784,35 +2787,26 @@
     recalc();
   })();
 
-  // ===== Animated hero SMS thread =====
-  (function () {
-    var thread = document.getElementById('hero-thread');
-    var stage = document.querySelector('.phone-stage');
-    if (!thread || !stage) return;
+  // ===== Reusable animated SMS thread =====
+  // Usage: ShopFlowThread(threadEl, { script, observe, loop, holdMs, typingMs, betweenMs })
+  window.ShopFlowThread = function (thread, opts) {
+    if (!thread) return null;
+    opts = opts || {};
+    var script = opts.script || [];
+    var observeEl = opts.observe || thread.closest('.phone-stage') || thread.closest('.phone') || thread;
+    var holdMs = opts.holdMs != null ? opts.holdMs : 4000;
+    var betweenMs = opts.betweenMs != null ? opts.betweenMs : 600;
+    var loop = opts.loop !== false;
+    var typingMs = opts.typingMs || { you: 400, them: 600 };
+    var threshold = opts.threshold != null ? opts.threshold : 0.3;
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    var script = [
-      { side: 'you', text: 'Hey Mike — sorry we missed you at the shop. What service were you calling about?', metaAfter: '9:38 AM · Auto-sent' },
-      { side: 'them', text: 'looking for ceramic coating quote for my model 3' },
-      { side: 'you', text: 'Got it. Sending pricing now + can book you in this week. What day works best?' }
-    ];
-
-    var TYPING_MS = 600;
-    var BETWEEN_MS = 700;
-    var LOOP_PAUSE_MS = 10000;
-
-    var visible = true;
     var stopped = false;
+    var inView = true;
     var timers = [];
 
-    function schedule(fn, ms) {
-      var id = setTimeout(fn, ms);
-      timers.push(id);
-      return id;
-    }
+    function schedule(fn, ms) { var id = setTimeout(fn, ms); timers.push(id); return id; }
     function clearAll() { timers.forEach(clearTimeout); timers = []; }
-
     function el(tag, cls, html) {
       var n = document.createElement(tag);
       if (cls) n.className = cls;
@@ -2820,40 +2814,47 @@
       return n;
     }
 
+    function appendMessage(m) {
+      var bubble = el('div', 'msg ' + m.side, m.text);
+      thread.appendChild(bubble);
+      if (m.metaAfter) {
+        var meta = el('div', 'msg-meta', m.metaAfter);
+        meta.style.fontSize = '8px';
+        thread.appendChild(meta);
+      }
+    }
+
     function renderAllStatic() {
       thread.innerHTML = '';
-      script.forEach(function (m) {
-        thread.appendChild(el('div', 'msg ' + m.side, m.text));
-        if (m.metaAfter) {
-          var meta = el('div', 'msg-meta', m.metaAfter);
-          meta.style.fontSize = '8px';
-          thread.appendChild(meta);
-        }
-      });
+      script.forEach(appendMessage);
     }
 
     function step(i) {
       if (stopped) return;
       if (i >= script.length) {
-        schedule(function () { thread.innerHTML = ''; step(0); }, LOOP_PAUSE_MS);
+        if (!loop) return;
+        schedule(function () {
+          thread.style.transition = 'opacity 250ms ease-out';
+          thread.style.opacity = '0';
+          schedule(function () {
+            thread.innerHTML = '';
+            thread.style.opacity = '1';
+            step(0);
+          }, 260);
+        }, holdMs);
         return;
       }
       var m = script[i];
       var typing = el('div', 'msg-typing ' + m.side, '<span></span><span></span><span></span>');
       thread.appendChild(typing);
 
+      var typingDelay = typingMs[m.side] != null ? typingMs[m.side] : 500;
       schedule(function () {
         if (stopped) return;
         typing.remove();
-        var bubble = el('div', 'msg ' + m.side, m.text);
-        thread.appendChild(bubble);
-        if (m.metaAfter) {
-          var meta = el('div', 'msg-meta', m.metaAfter);
-          meta.style.fontSize = '8px';
-          thread.appendChild(meta);
-        }
-        schedule(function () { step(i + 1); }, BETWEEN_MS);
-      }, TYPING_MS);
+        appendMessage(m);
+        schedule(function () { step(i + 1); }, betweenMs);
+      }, typingDelay);
     }
 
     function start() { stopped = false; thread.innerHTML = ''; step(0); }
@@ -2861,21 +2862,31 @@
 
     if (reduce) {
       renderAllStatic();
-      return;
+      return { start: function () {}, stop: function () {}, restart: function () {} };
     }
 
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting && !visible) { visible = true; start(); }
-          else if (!e.isIntersecting && visible) { visible = false; stop(); }
+          if (e.isIntersecting && !inView) { inView = true; start(); }
+          else if (!e.isIntersecting && inView) { inView = false; stop(); }
         });
-      }, { threshold: 0.2 });
-      io.observe(stage);
+      }, { threshold: threshold });
+      io.observe(observeEl);
     }
 
     start();
-  })();
+    return { start: start, stop: stop, restart: function () { stop(); start(); } };
+  };
+
+  // Hero instance
+  ShopFlowThread(document.getElementById('hero-thread'), {
+    script: [
+      { side: 'you', text: 'Hey Mike — sorry we missed you at the shop. What service were you calling about?', metaAfter: '9:38 AM · Auto-sent' },
+      { side: 'them', text: 'looking for ceramic coating quote for my model 3' },
+      { side: 'you', text: 'Got it. Sending pricing now + can book you in this week. What day works best?' }
+    ]
+  });
 
   // ===== Qualification form =====
   (function () {
