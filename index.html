@@ -1987,8 +1987,32 @@
     width: 100%;
   }
 
-  .qual-submit.is-loading { opacity: 0.7; cursor: progress; }
+  .qual-submit.is-loading { opacity: 0.85; cursor: progress; }
   .qual-submit:disabled { cursor: not-allowed; }
+
+  .qual-honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .qual-spinner {
+    display: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: var(--color-text-primary);
+    border-radius: 50%;
+    animation: qualSpin 0.7s linear infinite;
+  }
+
+  .qual-submit.is-loading .qual-spinner { display: inline-block; }
+  .qual-submit.is-loading .btn-arrow { display: none; }
+
+  @keyframes qualSpin { to { transform: rotate(360deg); } }
 
   .qual-fine {
     grid-column: 1 / -1;
@@ -2799,9 +2823,12 @@
               </select>
             </div>
 
+            <input type="text" name="botcheck" id="q-botcheck" class="qual-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
             <button class="btn qual-submit" type="submit" id="qual-submit">
-              Send details
+              <span class="qual-submit-label">Send details</span>
               <span class="btn-arrow">→</span>
+              <span class="qual-spinner" aria-hidden="true"></span>
             </button>
 
             <div class="qual-fine">No spam. We reply personally.</div>
@@ -3293,64 +3320,97 @@
     activate(0, false);
   })();
 
-  // ===== Qualification form =====
+  // ===== Qualification form (Web3Forms) =====
   (function () {
     var form = document.getElementById('qual-form');
     var thanks = document.getElementById('qual-thanks');
     var submit = document.getElementById('qual-submit');
     if (!form || !thanks || !submit) return;
 
+    var ACCESS_KEY = 'cac7bc09-fc5c-4816-b783-1428d410d53c';
+    var ENDPOINT = 'https://api.web3forms.com/submit';
+    var GENERIC_ERROR = "We couldn’t send that just now — please retry, or email us directly at farman@runshopflow.com.";
+
     var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    var labelEl = submit.querySelector('.qual-submit-label');
+
+    function val(id) {
+      var el = form.querySelector('#' + id);
+      return el ? el.value.trim() : '';
+    }
 
     function showError(msg) {
       var existing = form.querySelector('.qual-error');
       if (existing) existing.remove();
       var box = document.createElement('div');
       box.className = 'qual-error';
+      box.setAttribute('role', 'alert');
       box.textContent = msg;
       form.insertBefore(box, submit);
     }
 
+    function clearError() {
+      var existing = form.querySelector('.qual-error');
+      if (existing) existing.remove();
+    }
+
+    function setLoading(on) {
+      submit.disabled = on;
+      submit.classList.toggle('is-loading', on);
+      if (labelEl) labelEl.textContent = on ? 'Sending…' : 'Send details';
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var data = {};
-      Array.from(form.elements).forEach(function (el) {
-        if (el.name) data[el.name] = el.value.trim();
-      });
 
-      var emailField = form.querySelector('#q-email');
-      if (!data.email || !emailRe.test(data.email)) {
-        showError('Please enter a valid email address.');
-        emailField.focus();
-        return;
-      }
+      var shopName = val('q-shop');
+      var location = val('q-location');
+      var phone = val('q-phone');
+      var email = val('q-email');
+      var revenue = val('q-revenue');
+      var problem = val('q-problem');
 
-      var err = form.querySelector('.qual-error');
-      if (err) err.remove();
-      submit.disabled = true;
-      submit.classList.add('is-loading');
-      var labelNode = submit.firstChild;
-      var originalLabel = labelNode.textContent;
-      labelNode.textContent = 'Sending… ';
+      if (!shopName) { showError('Please enter your shop name.'); form.querySelector('#q-shop').focus(); return; }
+      if (!location) { showError('Please enter your city and state.'); form.querySelector('#q-location').focus(); return; }
+      if (!email || !emailRe.test(email)) { showError('Please enter a valid email address.'); form.querySelector('#q-email').focus(); return; }
+      if (!revenue) { showError('Please pick a monthly revenue range.'); form.querySelector('#q-revenue').focus(); return; }
+      if (!problem) { showError('Please pick your biggest follow-up problem.'); form.querySelector('#q-problem').focus(); return; }
 
-      function resetSubmit() {
-        submit.disabled = false;
-        submit.classList.remove('is-loading');
-        labelNode.textContent = originalLabel;
-      }
+      clearError();
+      setLoading(true);
 
-      fetch('/api/lead', {
+      var payload = {
+        access_key: ACCESS_KEY,
+        subject: 'New ShopFlow lead: ' + shopName,
+        from_name: 'ShopFlow Website',
+        shop_name: shopName,
+        location: location,
+        phone: phone,
+        email: email,
+        monthly_revenue: revenue,
+        biggest_problem: problem,
+        replyto: email,
+        botcheck: val('q-botcheck')
+      };
+
+      fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       }).then(function (res) {
-        if (!res.ok) throw new Error('Request failed (' + res.status + ')');
-        form.hidden = true;
-        thanks.hidden = false;
+        return res.json().catch(function () { return { success: false }; });
+      }).then(function (json) {
+        if (json && json.success === true) {
+          form.hidden = true;
+          thanks.hidden = false;
+        } else {
+          setLoading(false);
+          showError(GENERIC_ERROR);
+        }
       }).catch(function () {
-        // TODO: wire real /api/lead handler; this surfaces the error to the user.
-        resetSubmit();
-        showError('We couldn’t send that just now — please retry, or email us directly at farman@runshopflow.com.');
+        setLoading(false);
+        showError(GENERIC_ERROR);
       });
     });
   })();
